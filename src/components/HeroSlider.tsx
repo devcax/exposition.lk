@@ -8,7 +8,7 @@ const HeroSlider = () => {
   const slides = [
     {
       image: 'https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1920',
-      title: 'Exposition',
+      logo: '/public/EXPO LOGO.png',
       subtitle: 'University Magazine Excellence',
       description: 'Discover groundbreaking research, inspiring stories, and the future of education through our comprehensive magazine platform',
     },
@@ -55,7 +55,7 @@ const HeroSlider = () => {
           >
             <img
               src={slide.image}
-              alt={slide.title}
+              alt={slide.title || "Exposition"}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70" />
@@ -72,34 +72,47 @@ const HeroSlider = () => {
 
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center text-center z-10">
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4 w-full">
           <div className={`transform transition-all duration-1000 ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
-            <div className="mb-6">
-              <span className="inline-block px-4 py-2 bg-amber-600/20 backdrop-blur-sm border border-amber-600/30 rounded-full text-amber-400 text-sm font-medium mb-4">
-                Academic Excellence
-              </span>
-            </div>
+            {/* Logo with optimized sizing and reduced spacing */}
+            {currentSlide === 0 ? (
+              <div className="flex flex-col items-center">
+                <img 
+                  src={slides[currentSlide].logo} 
+                  alt="Exposition Logo"
+                  className="h-[150px] md:h-[220px] lg:h-[280px] w-auto max-w-[90%] object-contain" 
+                />
+                <div className="w-full max-w-2xl mx-auto">
+                  <p className="text-xl md:text-3xl text-[#f1b759] mt-2 mb-1 font-light">
+                    {slides[currentSlide].subtitle}
+                  </p>
+                  <p className="text-lg text-white/80 mb-6 leading-relaxed">
+                    {slides[currentSlide].description}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-3">
+                  <span className="bg-gradient-to-r from-white via-[#f1b759] to-[#f1b759] bg-clip-text text-transparent leading-tight">
+                    {slides[currentSlide].title}
+                  </span>
+                </h1>
+                <p className="text-xl md:text-3xl text-[#f1b759] mb-3 font-light">
+                  {slides[currentSlide].subtitle}
+                </p>
+                <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">
+                  {slides[currentSlide].description}
+                </p>
+              </>
+            )}
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-white via-[#f1b759] to-[#f1b759] bg-clip-text text-transparent leading-tight">
-                {slides[currentSlide].title}
-              </span>
-            </h1>
-
-            <p className="text-xl md:text-3xl text-[#f1b759] mb-4 font-light">
-              {slides[currentSlide].subtitle}
-            </p>
-
-            <p className="text-lg text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed">
-              {slides[currentSlide].description}
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="group relative overflow-hidden bg-gradient-to-r from-[#f1b759] to-[#d1a93a] hover:from-[#d1a93a] hover:to-[#b18b20] text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#f1b759]/25">
-                <div className="flex items-center space-x-3">
+            {/* CTA Buttons with reduced top margin */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-2">
+              <button className="group relative overflow-hidden bg-gradient-to-r from-[#f1b759] to-[#d1a93a] hover:from-[#d1a93a] hover:to-[#b18b20] text-black font-semibold px-6 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#f1b759]/25">
+                <div className="flex items-center space-x-2">
                   <Play className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
                   <span>E-Magazine</span>
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -107,7 +120,7 @@ const HeroSlider = () => {
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
               </button>
 
-              <button className="group relative overflow-hidden border-2 border-[#f1b759]/50 hover:border-[#d1a93a] text-white hover:text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm">
+              <button className="group relative overflow-hidden border-2 border-[#f1b759]/50 hover:border-[#d1a93a] text-white hover:text-black font-semibold px-6 py-3 rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm">
                 <span className="relative z-10">Learn More</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f1b759] to-[#d1a93a] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
               </button>
