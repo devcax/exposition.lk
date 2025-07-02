@@ -83,12 +83,12 @@ const HeroSlider = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-white via-amber-200 to-amber-300 bg-clip-text text-transparent leading-tight">
+              <span className="bg-gradient-to-r from-white via-[#f1b759] to-[#f1b759] bg-clip-text text-transparent leading-tight">
                 {slides[currentSlide].title}
               </span>
             </h1>
             
-            <p className="text-xl md:text-3xl text-amber-400 mb-4 font-light">
+            <p className="text-xl md:text-3xl text-[#f1b759] mb-4 font-light">
               {slides[currentSlide].subtitle}
             </p>
             
@@ -98,7 +98,7 @@ const HeroSlider = () => {
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button className="group relative overflow-hidden bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-amber-600/25">
+              <button className="group relative overflow-hidden bg-gradient-to-r from-[#f1b759] to-[#d1a93a] hover:from-[#d1a93a] hover:to-[#b18b20] text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#f1b759]/25">
                 <div className="flex items-center space-x-3">
                   <Play className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
                   <span>E-Magazine</span>
@@ -107,9 +107,9 @@ const HeroSlider = () => {
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
               </button>
               
-              <button className="group relative overflow-hidden border-2 border-amber-600/50 hover:border-amber-500 text-white hover:text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm">
+              <button className="group relative overflow-hidden border-2 border-[#f1b759]/50 hover:border-[#d1a93a] text-white hover:text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm">
                 <span className="relative z-10">Learn More</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-500 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#f1b759] to-[#d1a93a] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
               </button>
             </div>
           </div>
@@ -119,13 +119,13 @@ const HeroSlider = () => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white hover:text-amber-500 transition-all duration-300 z-20 hover:scale-110"
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white hover:text-[#f1b759] transition-all duration-300 z-20 hover:scale-110"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white hover:text-amber-500 transition-all duration-300 z-20 hover:scale-110"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white hover:text-[#f1b759] transition-all duration-300 z-20 hover:scale-110"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
@@ -138,12 +138,12 @@ const HeroSlider = () => {
             onClick={() => setCurrentSlide(index)}
             className={`relative overflow-hidden transition-all duration-300 ${
               index === currentSlide 
-                ? 'w-12 h-3 bg-amber-600 rounded-full' 
+                ? 'w-12 h-3 bg-[#f1b759] rounded-full' 
                 : 'w-3 h-3 bg-white/50 hover:bg-white/70 rounded-full'
             }`}
           >
             {index === currentSlide && (
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-400 rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#f1b759] to-[#d1a93a] rounded-full animate-pulse"></div>
             )}
           </button>
         ))}

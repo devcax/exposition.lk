@@ -1,12 +1,26 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowRight, Heart } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Linkedin, Instagram, ArrowRight, Heart } from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
-    { icon: <Facebook className="h-5 w-5" />, href: '#', label: 'Facebook', color: 'hover:text-blue-400' },
-    { icon: <Twitter className="h-5 w-5" />, href: '#', label: 'Twitter', color: 'hover:text-sky-400' },
-    { icon: <Linkedin className="h-5 w-5" />, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500' },
-    { icon: <Instagram className="h-5 w-5" />, href: '#', label: 'Instagram', color: 'hover:text-pink-400' },
+    {
+      icon: <Facebook className="h-5 w-5" />,
+      href: 'https://www.facebook.com/imssa.uok/',
+      label: 'Facebook',
+      color: 'hover:text-blue-400',
+    },
+    {
+      icon: <Linkedin className="h-5 w-5" />,
+      href: 'https://lk.linkedin.com/company/imssauok',
+      label: 'LinkedIn',
+      color: 'hover:text-blue-500',
+    },
+    {
+      icon: <Instagram className="h-5 w-5" />,
+      href: 'https://www.instagram.com/imssa.uok/',
+      label: 'Instagram',
+      color: 'hover:text-pink-400',
+    },
   ];
 
   const quickLinks = [
@@ -52,12 +66,11 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-4 mb-6 group">
               <div className="relative">
-                <img 
-                  src="/public/EXPO LOGO.png" 
-                  alt="Exposition Logo" 
-                  className="h-12 w-auto group-hover:scale-110 transition-all duration-300"
+                <img
+                  src="/public/EXPO LOGO.png"
+                  alt="Exposition Logo"
+                  className="h-32 w-auto group-hover:scale-110 transition-all duration-300"
                   onError={(e) => {
-                    // Fallback to text logo if image fails to load
                     e.currentTarget.style.display = 'none';
                     e.currentTarget.nextElementSibling!.style.display = 'block';
                   }}
@@ -69,9 +82,10 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-300 mb-8 leading-relaxed text-lg">
-              Celebrating academic excellence and fostering innovation through compelling storytelling, meaningful partnerships, and community engagement that shapes the future of education.
+              Celebrating academic excellence and fostering innovation through compelling storytelling, meaningful partnerships,
+              and community engagement that shapes the future of education.
             </p>
-            
+
             {/* Newsletter Signup */}
             <div className="mb-8">
               <h4 className="text-white font-semibold mb-4">Stay Updated</h4>
@@ -81,7 +95,7 @@ const Footer = () => {
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-700/50 rounded-l-xl text-white placeholder-gray-400 focus:outline-none focus:border-amber-600/50 transition-colors duration-300"
                 />
-                <button className="px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-semibold rounded-r-xl transition-all duration-300 transform hover:scale-105">
+                <button className="px-6 py-3 bg-[#f1b759] hover:bg-[#e8a940] text-black font-semibold rounded-r-xl transition-all duration-300 transform hover:scale-105">
                   <ArrowRight className="h-5 w-5" />
                 </button>
               </div>
@@ -94,6 +108,8 @@ const Footer = () => {
                   key={index}
                   href={social.href}
                   aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`p-3 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700/50 hover:border-gray-600/50 rounded-xl text-gray-400 ${social.color} transition-all duration-300 transform hover:scale-110 hover:shadow-lg`}
                 >
                   {social.icon}
@@ -106,7 +122,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-white mb-6 relative">
               Quick Links
-              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-amber-600 to-amber-500"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-[#f1b759] hover:bg-[#e8a940]"></div>
             </h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
@@ -127,7 +143,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-white mb-6 relative">
               Partnerships
-              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-amber-600 to-amber-500"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-[#f1b759] hover:bg-[#e8a940]"></div>
             </h3>
             <ul className="space-y-3">
               {partnershipLinks.map((link, index) => (
@@ -148,7 +164,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-white mb-6 relative">
               Resources
-              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-amber-600 to-amber-500"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-[#f1b759] hover:bg-[#e8a940]"></div>
             </h3>
             <ul className="space-y-3 mb-8">
               {resources.map((resource, index) => (
@@ -167,19 +183,19 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-4">
               <div className="flex items-center space-x-3 text-gray-300 group">
-                <div className="p-2 bg-amber-600/20 rounded-lg group-hover:bg-amber-600/30 transition-colors duration-300">
+                <div className="p-2 bg-[#f1b759]/20 rounded-lg group-hover:bg-[#f1b759]/30 transition-colors duration-300">
                   <MapPin className="h-4 w-4 text-amber-500" />
                 </div>
                 <span className="text-sm">123 University Ave, Academic City</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300 group">
-                <div className="p-2 bg-amber-600/20 rounded-lg group-hover:bg-amber-600/30 transition-colors duration-300">
+                <div className="p-2 bg-[#f1b759]/20 rounded-lg group-hover:bg-[#f1b759]/30 transition-colors duration-300">
                   <Phone className="h-4 w-4 text-amber-500" />
                 </div>
                 <span className="text-sm">+1 (555) 123-4567</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300 group">
-                <div className="p-2 bg-amber-600/20 rounded-lg group-hover:bg-amber-600/30 transition-colors duration-300">
+                <div className="p-2 bg-[#f1b759]/20 rounded-lg group-hover:bg-[#f1b759]/30 transition-colors duration-300">
                   <Mail className="h-4 w-4 text-amber-500" />
                 </div>
                 <span className="text-sm">magazine@exposition.lk</span>
@@ -192,9 +208,8 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 text-gray-400 text-sm mb-4 md:mb-0">
-              <span>© 2024 Exposition. Made with</span>
-              <Heart className="h-4 w-4 text-red-500 animate-pulse" />
-              <span>for academic excellence.</span>
+              <span>© 2024 Exposition. </span>
+              <span>All Rights Reserved.</span>
             </div>
             <div className="flex flex-wrap gap-6">
               <a href="#" className="text-gray-400 hover:text-amber-500 text-sm transition-colors duration-300">
