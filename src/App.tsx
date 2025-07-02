@@ -17,7 +17,7 @@ function App() {
       <Gallery />
       <Reviews />
       <PartnershipTree />
-      <PartnershipPackages />
+      {/*<PartnershipPackages />*/}
       <Footer />
     </div>
   );

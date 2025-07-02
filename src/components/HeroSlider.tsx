@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Play, ArrowRight } from 'lucide-react';
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   const slides = [
     {
       image: 'https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=1920',
@@ -81,21 +81,21 @@ const HeroSlider = () => {
                 Academic Excellence
               </span>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white via-[#f1b759] to-[#f1b759] bg-clip-text text-transparent leading-tight">
                 {slides[currentSlide].title}
               </span>
             </h1>
-            
+
             <p className="text-xl md:text-3xl text-[#f1b759] mb-4 font-light">
               {slides[currentSlide].subtitle}
             </p>
-            
+
             <p className="text-lg text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed">
               {slides[currentSlide].description}
             </p>
-            
+
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <button className="group relative overflow-hidden bg-gradient-to-r from-[#f1b759] to-[#d1a93a] hover:from-[#d1a93a] hover:to-[#b18b20] text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-[#f1b759]/25">
@@ -106,7 +106,7 @@ const HeroSlider = () => {
                 </div>
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
               </button>
-              
+
               <button className="group relative overflow-hidden border-2 border-[#f1b759]/50 hover:border-[#d1a93a] text-white hover:text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm">
                 <span className="relative z-10">Learn More</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#f1b759] to-[#d1a93a] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -156,6 +156,9 @@ const HeroSlider = () => {
           <div className="w-px h-12 bg-gradient-to-b from-white/60 to-transparent"></div>
         </div>
       </div>
+
+      {/* Bottom Gradient Overlay to blend into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-gray-900 z-10 pointer-events-none" />
     </section>
   );
 };
