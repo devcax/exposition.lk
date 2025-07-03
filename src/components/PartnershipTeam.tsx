@@ -50,9 +50,11 @@ const PartnershipTeam: React.FC = () => {
     <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#e3c767] to-[#aa7d39]">
-            Partnership Team
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-bold mb-8">
+            <span className="bg-gradient-to-r from-white via-[#e3c767] to-[#aa7d39] bg-clip-text text-transparent">
+              Partnership Team
+            </span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             Meet our dedicated partnership team who will work closely with you to ensure your partnership goals are achieved
