@@ -165,7 +165,7 @@ const PartnershipPackages = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black">
+    <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-4xl font-bold text-white mb-16">
           Partnership Packages

@@ -47,7 +47,7 @@ const members: Member[] = [
 
 const PartnershipTeam: React.FC = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <div className="text-center mb-20">
