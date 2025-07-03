@@ -1,8 +1,54 @@
 import React from 'react';
 import { Award, Gem, Star, Shield, Crown } from 'lucide-react';
 
-const PartnershipTree = () => {
-  const monetaryPartnerships = [
+// Type for partnership objects
+type Partnership = {
+  id: string;
+  level: string;
+  icon: JSX.Element;
+  color: string;
+  bgColor: string;
+  investment?: string;
+  description: string;
+};
+
+// Props for the card component
+interface PartnershipCardProps {
+  partnership: Partnership;
+  isLarge?: boolean;
+}
+
+// Card component
+const PartnershipCard: React.FC<PartnershipCardProps> = ({ partnership, isLarge = false }) => (
+  <div
+    className="group relative overflow-hidden backdrop-blur-xl border-2 rounded-2xl transition-all duration-500 transform hover:scale-105 cursor-pointer"
+    style={{
+      minHeight: isLarge ? '280px' : '220px',
+      padding: '1.5rem',
+      borderColor: '#f1b759',
+      backgroundColor: partnership.bgColor,
+    }}
+  >
+    <div className={`absolute inset-0 bg-gradient-to-br ${partnership.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`} />
+    <div className="relative z-10 text-center h-full flex flex-col justify-center">
+      <div
+        className={`inline-flex items-center justify-center ${isLarge ? 'w-20 h-20' : 'w-16 h-16'} bg-gradient-to-br ${partnership.color} rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto`}
+      >
+        {partnership.icon}
+      </div>
+      <h4 className={`${isLarge ? 'text-xl' : 'text-lg'} font-bold text-white mb-3 group-hover:text-[#e3c767] transition-colors duration-300`}>
+        {partnership.level}
+      </h4>
+      {partnership.investment && (
+        <p className="text-[#e3c767] font-medium text-lg mb-4">{partnership.investment}</p>
+      )}
+      <p className="text-gray-300 text-sm leading-relaxed flex-grow">{partnership.description}</p>
+    </div>
+  </div>
+);
+
+const PartnershipTree: React.FC = () => {
+  const monetaryPartnerships: Partnership[] = [
     {
       id: 'title',
       level: 'Title Partner',
@@ -59,7 +105,7 @@ const PartnershipTree = () => {
     },
   ];
 
-  const careerFairPartnerships = [
+  const careerFairPartnerships: Partnership[] = [
     {
       id: 'premium',
       level: 'Premium Partner',
@@ -80,7 +126,7 @@ const PartnershipTree = () => {
     },
   ];
 
-  const resourcePartnerships = [
+  const resourcePartnerships: Partnership[] = [
     {
       id: 'printing',
       level: 'Printing Partner',
@@ -123,40 +169,9 @@ const PartnershipTree = () => {
     },
   ];
 
-  const PartnershipCard = ({ partnership, isLarge = false }) => (
-    <div
-      className="group relative overflow-hidden backdrop-blur-xl border-2 rounded-2xl transition-all duration-500 transform hover:scale-105 cursor-pointer"
-      style={{
-        minHeight: isLarge ? '280px' : '220px',
-        padding: '1.5rem',
-        borderColor: '#f1b759',
-        backgroundColor: partnership.bgColor,
-      }}
-    >
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${partnership.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}
-      />
-      <div className="relative z-10 text-center h-full flex flex-col justify-center">
-        <div
-          className={`inline-flex items-center justify-center ${isLarge ? 'w-20 h-20' : 'w-16 h-16'} bg-gradient-to-br ${partnership.color} rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300 mx-auto`}
-        >
-          {partnership.icon}
-        </div>
-        <h4 className={`${isLarge ? 'text-xl' : 'text-lg'} font-bold text-white mb-3 group-hover:text-[#e3c767] transition-colors duration-300`}>
-          {partnership.level}
-        </h4>
-        {partnership.investment && (
-          <p className="text-[#e3c767] font-medium text-lg mb-4">{partnership.investment}</p>
-        )}
-        <p className="text-gray-300 text-sm leading-relaxed flex-grow">{partnership.description}</p>
-      </div>
-    </div>
-  );
-
   return (
     <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Header */}
         <div className="text-center mb-20">
           <div className="inline-block px-4 py-2 bg-[#aa7d39]/20 backdrop-blur-sm border border-[#aa7d39]/30 rounded-full text-[#e3c767] text-sm font-medium mb-6">
