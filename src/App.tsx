@@ -18,8 +18,8 @@ function App() {
       <Gallery />
       <Reviews />
       <PartnershipTree />
-      <PartnershipTeam />
       <PartnershipPackages />
+      <PartnershipTeam />
       <Footer />
     </div>
   );
