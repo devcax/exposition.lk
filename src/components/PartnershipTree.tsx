@@ -60,7 +60,7 @@ const PartnershipTree: React.FC = () => {
     },
     {
       id: 'platinum',
-      level: 'Platinum',
+      level: 'Platinum Partner',
       icon: <Gem className="h-8 w-8" />,
       color: 'from-gray-400 to-gray-600',
       bgColor: 'bg-gray-400/10',
@@ -69,7 +69,7 @@ const PartnershipTree: React.FC = () => {
     },
     {
       id: 'gold',
-      level: 'Gold',
+      level: 'Gold Partner',
       icon: <Star className="h-8 w-8" />,
       color: 'from-[#f1b759] to-[#f1b759]',
       bgColor: 'bg-[#f1b759]/10',
@@ -78,7 +78,7 @@ const PartnershipTree: React.FC = () => {
     },
     {
       id: 'silver',
-      level: 'Silver',
+      level: 'Silver Partner',
       icon: <Shield className="h-8 w-8" />,
       color: 'from-gray-300 to-gray-500',
       bgColor: 'bg-gray-400/10',
@@ -87,7 +87,7 @@ const PartnershipTree: React.FC = () => {
     },
     {
       id: 'bronze',
-      level: 'Bronze',
+      level: 'Bronze Partner',
       icon: <Award className="h-8 w-8" />,
       color: 'from-orange-400 to-orange-600',
       bgColor: 'bg-orange-500/10',
