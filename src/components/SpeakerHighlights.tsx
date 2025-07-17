@@ -78,7 +78,7 @@ const SpeakerHighlights = () => {
             </span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Meet our keynote speakers
+            Key takeaways from previous keynote thought leaders
           </p>
         </div>
 
@@ -163,40 +163,48 @@ const SpeakerHighlights = () => {
             </div>
           </div>
 
-    {/* Speaker Preview Strip */}
-    <div className="mt-16">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-gray-400 text-sm uppercase tracking-wider">All Speakers</h3>
-        <div className="h-px bg-gray-800 flex-1 ml-4"></div>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {speakers.map((s, idx) => (
-          <button
-            key={idx}
-            onClick={() => !isTransitioning && setCurrent(idx)}
-            className="group text-left"
-          >
-            <div className={`relative mb-3 overflow-hidden rounded-lg ${
-              idx === current ? "ring-2 ring-amber-400" : ""
-            }`}>
-              <div className="aspect-[3/4] overflow-hidden bg-gray-800">
-                <img
-                  src={s.photo}
-                  alt={s.name}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
+          {/* Speaker Preview Strip */}
+          <div className="mt-16">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-gray-400 text-sm uppercase tracking-wider">
+                All Speakers
+              </h3>
+              <div className="h-px bg-gray-800 flex-1 ml-4"></div>
             </div>
-            <h4 className={`font-semibold text-sm mb-1 transition-colors ${
-              idx === current ? "text-amber-400" : "text-white group-hover:text-amber-400"
-            }`}>
-              {s.name}
-            </h4>
-            <p className="text-gray-500 text-xs">{s.title}</p>
-          </button>
-        ))}
-      </div>
-    </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {speakers.map((s, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => !isTransitioning && setCurrent(idx)}
+                  className="group text-left"
+                >
+                  <div
+                    className={`relative mb-3 overflow-hidden rounded-lg ${
+                      idx === current ? "ring-2 ring-amber-400" : ""
+                    }`}
+                  >
+                    <div className="aspect-[3/4] overflow-hidden bg-gray-800">
+                      <img
+                        src={s.photo}
+                        alt={s.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                  <h4
+                    className={`font-semibold text-sm mb-1 transition-colors ${
+                      idx === current
+                        ? "text-amber-400"
+                        : "text-white group-hover:text-amber-400"
+                    }`}
+                  >
+                    {s.name}
+                  </h4>
+                  <p className="text-gray-500 text-xs">{s.title}</p>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

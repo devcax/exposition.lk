@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, X, Heart, Share2 } from 'lucide-react';
-import SpeakerHighlights from './SpeakerHighlights';
+import React, { useState } from "react";
+import { ChevronLeft, ChevronRight, X, Heart, Share2 } from "lucide-react";
+import SpeakerHighlights from "./SpeakerHighlights";
 
 // Gallery component
 const Gallery = () => {
@@ -9,52 +9,60 @@ const Gallery = () => {
 
   const images = [
     {
-      src: 'https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Exposition Magazine Launch',
-      category: 'magazine',
-      description: 'Annual magazine launch event showcasing academic excellence',
+      src: "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Exposition Magazine Launch",
+      category: "magazine",
+      description:
+        "A vibrant launch event spotlighting outstanding academic voices and student innovation.",
     },
     {
-      src: 'https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Expert Interviews',
-      category: 'interviews',
-      description: 'In-depth conversations with industry leaders and academics',
+      src: "https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Expert Interviews",
+      category: "interviews",
+      description:
+        "Insightful dialogues uncovering trends, experiences, and wisdom from top experts.",
     },
     {
-      src: 'https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Student Workshops',
-      category: 'workshops',
-      description: 'Interactive learning sessions and skill development programs',
+      src: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Student Workshops",
+      category: "workshops",
+      description:
+        "Dynamic workshops blending fun, learning, and personal growth for students.",
     },
     {
-      src: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Industrial Forum',
-      category: 'industrial',
-      description: 'Bridging academia and industry through collaborative discussions',
+      src: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Industrial Forum",
+      category: "industrial",
+      description:
+        "Connecting scholars and professionals to exchange ideas, insights, and opportunities.",
     },
     {
-      src: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Career Fair',
-      category: 'career',
-      description: 'Connecting students with leading employers and opportunities',
+      src: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Career Fair",
+      category: "career",
+      description:
+        "Bringing together diverse industries to offer students a world of career possibilities.",
     },
     {
-      src: 'https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Partnership Events',
-      category: 'partnerships',
-      description: 'Celebrating our valued partners and collaborative achievements',
+      src: "https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Partnership Events",
+      category: "partnerships",
+      description:
+        "Celebrating meaningful collaborations that advance academic and industry progress.",
     },
     {
-      src: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Research Presentations',
-      category: 'research',
-      description: 'Showcasing groundbreaking research and innovation',
+      src: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Research Presentations",
+      category: "research",
+      description:
+        "A platform for sharing cutting-edge research and intellectual exploration.",
     },
     {
-      src: 'https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Awards Ceremony',
-      category: 'awards',
-      description: 'Recognizing excellence in academic and research achievements',
+      src: "https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=800",
+      title: "Awards Ceremony",
+      category: "awards",
+      description:
+        "Celebrating excellence in research, learning, and scholarly impact.",
     },
   ];
 
@@ -68,7 +76,10 @@ const Gallery = () => {
 
   return (
     <>
-      <section id="gallery" className="py-24 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden">
+      <section
+        id="gallery"
+        className="py-24 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden"
+      >
         {/* Background */}
         <div className="absolute inset-0">
           <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-amber-600/5 rounded-full blur-3xl"></div>
@@ -83,7 +94,9 @@ const Gallery = () => {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-             A comprehensive ecosystem of academic content, industry connections, and professional development opportunities  </p>
+              Integrating academic pursuits with real-world insights,
+              connections, and career-focused experiences.{" "}
+            </p>
           </div>
 
           {/* Slider */}
@@ -96,9 +109,15 @@ const Gallery = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-3xl" />
             <div className="absolute bottom-0 left-0 p-6 text-white max-w-2xl">
-              <h3 className="text-2xl font-bold">{images[currentSlide].title}</h3>
-              <p className="text-sm text-amber-400 capitalize">{images[currentSlide].category}</p>
-              <p className="text-gray-300 mt-1">{images[currentSlide].description}</p>
+              <h3 className="text-2xl font-bold">
+                {images[currentSlide].title}
+              </h3>
+              <p className="text-sm text-amber-400 capitalize">
+                {images[currentSlide].category}
+              </p>
+              <p className="text-gray-300 mt-1">
+                {images[currentSlide].description}
+              </p>
             </div>
 
             {/* Navigation */}
@@ -166,7 +185,6 @@ const Gallery = () => {
         )} */}
       </section>
       {/* Speaker Highlights Section */}
-    
     </>
   );
 };
