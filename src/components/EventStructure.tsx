@@ -15,6 +15,15 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import edify from "/assets/Event Structure/edify.jpg";
+import interviews from "/assets/Event Structure/Interviews.jpg";
+import workshops from "/assets/Event Structure/Workshops.jpg";
+import industrialWeek from "/assets/Event Structure/Industrial Week.jpg";
+import magazine from "/assets/Event Structure/magazine.jpg";
+import industrialForum from "/assets/Event Structure/industrial forum.jpg";
+
+
+
 const EventStructure = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [activeCategory, setActiveCategory] = useState(0);
@@ -138,29 +147,28 @@ const EventStructure = () => {
     {
       title: "Magazine",
       subtitle: "Read More",
-      image:
-        "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400",
+      image: ma
       category: "magazine",
     },
     {
       title: "Podcast",
       subtitle: "Read More",
       image:
-        "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=400",
+        interviews
       category: "podcast",
     },
     {
       title: "Edify",
       subtitle: "Read More",
       image:
-        "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=400",
+       edify
       category: "edify",
     },
     {
-      title: "Blog",
+      title: "Industrial Forum",
       subtitle: "Read More",
       image:
-        "https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&w=400",
+        industrialForum
       category: "blog",
     },
     {

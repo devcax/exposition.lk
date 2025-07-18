@@ -29,6 +29,23 @@
     background: linear-gradient(to bottom, #d97706, #b45309);
     border-radius: 4px;
   }
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+/* Pause animation on hover */
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
 
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #b45309, #92400e);

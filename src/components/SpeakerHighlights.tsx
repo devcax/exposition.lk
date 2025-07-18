@@ -1,51 +1,63 @@
 import React, { useState, useEffect } from "react";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const speakers = [
   {
-    name: "Andy Lark",
-    title: "Global Brand & Marketing Expert",
-    photo: "/assets/speakers/1.jpeg",
-    highlight: "Amazon bestselling author & futurist",
-    expertise: ["Brand Strategy", "Digital Marketing", "Customer Experience"],
+    name: "Peter De Almeida",
+    title: "Business Leader",
+    photo: "/assets/speakers/peterdealmeida.jpg",
+    highlight: "Renowned for strategic leadership and corporate governance.",
+    expertise: ["Corporate Strategy", "Leadership", "Business Growth"],
   },
   {
-    name: "Dr. Maya Patel",
-    title: "AI Researcher",
-    photo: "/assets/speakers/2.jpg",
-    highlight: "Leading expert in ethical AI",
-    expertise: ["Artificial Intelligence", "Healthcare AI", "Sustainable Tech"],
+    name: "Dhanika Perera",
+    title: "Tech Innovator & Entrepreneur",
+    photo: "/assets/speakers/danikaperera.jpeg",
+    highlight: "Founder of a leading digital payment platform in Sri Lanka.",
+    expertise: ["Entrepreneurship", "FinTech", "Digital Payments"],
   },
   {
-    name: "Prof. John Smith",
-    title: "Dean of Engineering",
-    photo: "/assets/speakers/3.jpg",
-    highlight: "Pioneer in sustainable engineering",
-    expertise: ["Green Technology", "Innovation", "Engineering Leadership"],
+    name: "Kishu Gomez",
+    title: "Corporate Icon & CEO",
+    photo: "/assets/speakers/kishugomez.jpg",
+    highlight: "Expert in corporate management, branding, and leadership.",
+    expertise: ["Brand Management", "Corporate Leadership", "Marketing"],
   },
   {
-    name: "Ms. Aisha Rahman",
-    title: "Tech Entrepreneur",
-    photo: "/assets/speakers/4.jpg",
-    highlight: "Champion for diversity in tech",
-    expertise: ["Startups", "Women in Tech", "Innovation Strategy"],
+    name: "Deepal Sooriyarachchi",
+    title: "Management Guru & Author",
+    photo: "/assets/speakers/deepalsooriyarachchi.jpg",
+    highlight: "Author and speaker on management and personal development.",
+    expertise: ["Management", "Personal Development", "Marketing Strategy"],
+  },
+  {
+    name: "Dian Gomez",
+    title: "Business Magnate & Philanthropist",
+    photo: "/assets/speakers/diangomez.jpg",
+    highlight:
+      "Influential figure in Sri Lankan business and apparel industry.",
+    expertise: ["Business Development", "Leadership", "Apparel Industry"],
   },
 ];
 
 const SpeakerHighlights = () => {
   const [current, setCurrent] = useState(0);
+
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const navigate = (direction) => {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
+
     setTimeout(() => {
       if (direction === "next") {
         setCurrent((prev) => (prev + 1) % speakers.length);
       } else {
         setCurrent((prev) => (prev - 1 + speakers.length) % speakers.length);
       }
+
       setIsTransitioning(false);
     }, 200);
   };
@@ -69,7 +81,6 @@ const SpeakerHighlights = () => {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold mb-8">
@@ -81,7 +92,6 @@ const SpeakerHighlights = () => {
             Key takeaways from previous keynote thought leaders
           </p>
         </div>
-
         <div className="relative max-w-5xl mx-auto">
           {/* Main Speaker Card */}
           <div
@@ -99,7 +109,6 @@ const SpeakerHighlights = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               </div>
-
               {/* Content Section */}
               <div className="lg:w-3/5 p-8 lg:p-12 flex flex-col justify-between">
                 <div>
@@ -110,7 +119,6 @@ const SpeakerHighlights = () => {
                   <p className="text-gray-300 text-lg mb-6">
                     {speaker.highlight}
                   </p>
-
                   {/* Expertise Tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
                     {speaker.expertise.map((skill, idx) => (
@@ -123,7 +131,6 @@ const SpeakerHighlights = () => {
                     ))}
                   </div>
                 </div>
-
                 {/* Navigation */}
                 <div className="flex items-center justify-between">
                   <div className="flex gap-3">
@@ -142,7 +149,6 @@ const SpeakerHighlights = () => {
                       <ChevronRight className="h-5 w-5" />
                     </button>
                   </div>
-
                   {/* Progress Indicators */}
                   <div className="flex gap-2">
                     {speakers.map((_, idx) => (
@@ -162,7 +168,6 @@ const SpeakerHighlights = () => {
               </div>
             </div>
           </div>
-
           {/* Speaker Preview Strip */}
           <div className="mt-16">
             <div className="flex items-center justify-between mb-4">
@@ -171,7 +176,7 @@ const SpeakerHighlights = () => {
               </h3>
               <div className="h-px bg-gray-800 flex-1 ml-4"></div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {speakers.map((s, idx) => (
                 <button
                   key={idx}
@@ -192,7 +197,7 @@ const SpeakerHighlights = () => {
                     </div>
                   </div>
                   <h4
-                    className={`font-semibold text-sm mb-1 transition-colors ${
+                    className={`font-semibold text-sm mb-1 transition-colors min-h-[2.5rem] ${
                       idx === current
                         ? "text-amber-400"
                         : "text-white group-hover:text-amber-400"
