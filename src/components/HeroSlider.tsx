@@ -72,7 +72,7 @@ const HeroSlider = () => {
             {/* Logo Container with max height */}
             <div
               className="mb-6 md:mb-8 flex items-center justify-center"
-              style={{ maxHeight: "05vh" }}
+              style={{ maxHeight: "50vh" }}
             >
               <img
                 src={slideLogo}
@@ -95,7 +95,7 @@ const HeroSlider = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mt-6 md:mt-8">
               <a
-                href="#"
+                href="https://emagazine.exposition.lk/"
                 className="inline-flex items-center gap-2 bg-[#f1b759] hover:bg-[#d1a93a] text-black px-6 md:px-8 py-3 md:py-4 rounded-sm transition-colors duration-300 font-medium tracking-wide shadow-lg text-sm md:text-base"
               >
                 E-Magazine

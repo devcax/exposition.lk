@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 const Reviews = () => {
   const [currentReview, setCurrentReview] = useState(0);
@@ -7,57 +7,63 @@ const Reviews = () => {
 
   const reviews = [
     {
-      name: 'Dr. Sarah Johnson',
-      role: 'Professor of Engineering',
-      department: 'Mechanical Engineering',
+      name: "Mr. Deepal Sooriyarachchi",
+      role: " Former Managing Director of AVIVA NDB Insurance ",
+      department: "Management Consultant & Author",
       rating: 5,
-      comment: 'The university magazine beautifully captures the essence of our academic community. It showcases the incredible work being done by our faculty and students with exceptional storytelling and visual design.',
-      image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150',
+      comment:
+        "For me being part of Exposition 20 was truly a privilege. The meticulous planning and flawless execution by the University of Kelaniya  undergraduates of the Department of Industrial Management were truly inspiring.This young team has profoundly reinforced my hope for a better Sri Lanka.",
+      image: "/assets/speakers/deepalsooriyarachchi.jpg",
       featured: true,
     },
     {
-      name: 'Michael Chen',
-      role: 'Graduate Student',
-      department: 'Computer Science',
+      name: " Prof. Roshan G. Ragel",
+      role: " Senior Lecturer , University of Peradeniya",
+      department: " CEO, LEARN",
       rating: 5,
-      comment: 'Being featured in the magazine was an honor. It gave our research the recognition it deserved and helped us connect with other researchers in our field. The editorial team was professional and supportive.',
-      image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150',
+      comment:
+        "It was a pleasure to be part of the Exposition Issue 20 Industrial Forum. The session was well-curated, with an engaging moderator and insightful panel discussion. Kudos to the organizing team for bridging industry and academia so effectively. Looking forward to seeing Exposition grow even stronger.",
+      image: "/assets/reviews/ProfRagel-Photo4-1.jpg",
       featured: false,
     },
     {
-      name: 'Prof. Emily Rodriguez',
-      role: 'Dean of Sciences',
-      department: 'Faculty of Sciences',
+      name: "Mr. Thusara Rathnaweera",
+      role: "Deputy General Manager",
+      department: "Head of MX Biz @ Samsumg Sri Lanka",
       rating: 5,
-      comment: 'This magazine is a testament to the excellence of our institution. It effectively communicates our achievements and vision to the broader academic community while maintaining the highest editorial standards.',
-      image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150',
+      comment:
+        "The event was organized with professional standards, showcasing the exceptional commitment of University of Kelaniya students. As a guest speaker alongside industry experts, I witnessed how these bright minds facilitated insightful discussions on data democracy that have transformative potential for Sri Lanka's governance and economy.",
+      image: "/assets/reviews/thushara.jpeg",
       featured: true,
     },
     {
-      name: 'David Thompson',
-      role: 'Alumni Relations Director',
-      department: 'Alumni Affairs',
+      name: "Mr. Asela Waidyalankara",
+      role: "Cyber Security & AI Policy Leader",
+      department: "Educator & Global Speaker",
       rating: 5,
-      comment: 'The magazine keeps our alumni connected to the university. The quality of content and design is exceptional, making it a pleasure to read and share. It truly represents our institutional values.',
-      image: 'https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=150',
+      comment:
+        "Had an amazing time at the event organized by University of Kelaniya Management and Information Technology Students. As a panelist discussing 'Data Democracy: Empowering Individuals in the Digital Age,' our discussion highlighted crucial topics around data democratization and universal access. It was an important forum that effectively addressed the challenges and opportunities we face in navigating the digital age, demonstrating how empowering individuals with data can help organizations gain competitive advantage.",
+      image: "/assets/reviews/asela.jpeg",
       featured: false,
     },
     {
-      name: 'Dr. Amanda Foster',
-      role: 'Research Director',
-      department: 'Innovation Lab',
+      name: "Mr. Kosala Weerasena",
+      role: "Former Deputy General Manager @ SLT-Mobitel",
+      department: "Charted Telecom Engineer",
       rating: 5,
-      comment: 'The magazine provides an excellent platform for showcasing our research breakthroughs. The editorial team understands how to translate complex research into engaging stories for diverse audiences.',
-      image: 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=150',
+      comment:
+        "Impressed with the talents of undergraduates (belonging to Department of Industrial Management, Faculty of Science, University of Kelaniya) exhibited during the launching ceremony of ‘Exposition’ magazine, Issue 18. Delighted to witness the glamorous event emerged as a result of true enthusiasm, commitment and teamwork put together by students of a Government University..",
+      image: "/assets/reviews/kosala.png",
       featured: true,
     },
     {
-      name: 'James Wilson',
-      role: 'Student Body President',
-      department: 'Student Government',
+      name: "Mrs. Kanchana Priyakantha",
+      role: "Co-Founder & CEO of KReader",
+      department: "Director / Co-Founder of KBooks",
       rating: 5,
-      comment: 'As students, we appreciate how the magazine highlights our achievements and gives voice to our perspectives. It creates a sense of pride and belonging within our university community.',
-      image: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=150',
+      comment:
+        "The meticulous planning, festive atmosphere, and adept use of technology were truly commendable. From leadership to presentations, the organizing team executed every aspect with finesse, leaving a positive mark on all attendees. The University of Kelaniya students demonstrated exceptional dedication and foresight, particularly with their forward-thinking approach of providing an e-magazine version. Witnessing such exemplary youth filled me with optimism for Sri Lanka's future.",
+      image: "/assets/reviews/kanchana priyakantha.jpg",
       featured: false,
     },
   ];
@@ -67,16 +73,18 @@ const Reviews = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index') || '0');
-            setVisibleReviews(prev => [...new Set([...prev, index])]);
+            const index = parseInt(
+              entry.target.getAttribute("data-index") || "0"
+            );
+            setVisibleReviews((prev) => [...new Set([...prev, index])]);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    const reviewElements = document.querySelectorAll('.review-card');
-    reviewElements.forEach(el => observer.observe(el));
+    const reviewElements = document.querySelectorAll(".review-card");
+    reviewElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
@@ -122,11 +130,11 @@ const Reviews = () => {
           <div className="max-w-full lg:max-w-4xl mx-auto">
             <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-xl border border-amber-500/20 rounded-2xl p-6 md:p-8 lg:p-12">
               <Quote className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-amber-400/50 mb-4 md:mb-6" />
-              
+
               <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-white leading-relaxed mb-6 md:mb-8 font-light">
                 "{reviews[currentReview].comment}"
               </p>
-              
+
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex items-center gap-3 md:gap-4">
                   <img
@@ -148,7 +156,7 @@ const Reviews = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Navigation */}
             <div className="flex justify-center items-center gap-2 md:gap-4 mt-6 md:mt-8">
               <button
@@ -157,21 +165,21 @@ const Reviews = () => {
               >
                 <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
               </button>
-              
+
               <div className="flex gap-1.5 md:gap-2">
                 {reviews.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentReview(index)}
                     className={`h-2 md:h-2.5 rounded-full transition-all duration-300 ${
-                      index === currentReview 
-                        ? 'bg-amber-400 w-6 md:w-8' 
-                        : 'bg-gray-600 hover:bg-gray-500 w-2 md:w-2.5'
+                      index === currentReview
+                        ? "bg-amber-400 w-6 md:w-8"
+                        : "bg-gray-600 hover:bg-gray-500 w-2 md:w-2.5"
                     }`}
                   />
                 ))}
               </div>
-              
+
               <button
                 onClick={nextReview}
                 className="p-2 md:p-3 bg-gray-800/50 hover:bg-gray-700/50 backdrop-blur-sm border border-gray-700/50 rounded-full text-white hover:text-amber-400 transition-colors duration-300"
@@ -189,9 +197,9 @@ const Reviews = () => {
               key={index}
               data-index={index}
               className={`review-card relative bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-xl border border-amber-500/20 rounded-xl p-5 md:p-6 transition-all duration-500 ${
-                visibleReviews.includes(index) 
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-8 opacity-0'
+                visibleReviews.includes(index)
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
               } hover:border-amber-500/40`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -201,7 +209,7 @@ const Reviews = () => {
                   Featured
                 </div>
               )}
-              
+
               <div className="flex items-start gap-3 mb-4">
                 <img
                   src={review.image}
@@ -212,11 +220,15 @@ const Reviews = () => {
                   <h3 className="text-white font-bold text-base md:text-lg truncate">
                     {review.name}
                   </h3>
-                  <p className="text-amber-400 text-xs md:text-sm font-medium truncate">{review.role}</p>
-                  <p className="text-gray-400 text-xs truncate">{review.department}</p>
+                  <p className="text-amber-400 text-xs md:text-sm font-medium truncate">
+                    {review.role}
+                  </p>
+                  <p className="text-gray-400 text-xs truncate">
+                    {review.department}
+                  </p>
                 </div>
               </div>
-              
+
               <div className="relative">
                 <Quote className="h-4 w-4 md:h-5 md:w-5 text-amber-500/30 absolute -top-1 -left-1" />
                 <p className="text-gray-300 italic pl-3 leading-relaxed text-sm md:text-base line-clamp-4">
@@ -230,16 +242,18 @@ const Reviews = () => {
         {/* Stats Section */}
         <div className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {[
-            { number: '20+', label: 'Years' },
-            { number: '5+', label: 'Segments' },
-            { number: '100+', label: 'Partners' },
-            { number: '20+', label: 'Issues' },
+            { number: "20+", label: "Years" },
+            { number: "5+", label: "Segments" },
+            { number: "100+", label: "Partners" },
+            { number: "20+", label: "Issues" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent mb-1 md:mb-2">
                 {stat.number}
               </div>
-              <div className="text-sm md:text-base text-gray-400 font-medium">{stat.label}</div>
+              <div className="text-sm md:text-base text-gray-400 font-medium">
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import React from "react";
+import { Mail, Phone } from "lucide-react";
 
 interface Member {
   name: string;
@@ -12,36 +12,36 @@ interface Member {
 
 const members: Member[] = [
   {
-    name: 'Lavindu Binuwara',
-    title: 'Editor-in-Chief',
-    email: 'lavindubinuwara1@gmail.com',
-    phone: '+94 71 684 6120',
-    image: '/assets/team/lavindu.png',
-    linkedin: 'https://www.linkedin.com/in/lavindubinuwara',
+    name: "Lavindu Binuwara",
+    title: "Editors-in-Chief",
+    email: "lavindubinuwara1@gmail.com",
+    phone: "+94 71 684 6120",
+    image: "/assets/team/lavindu.png",
+    linkedin: "https://www.linkedin.com/in/lavindubinuwara",
   },
   {
-    name: 'Hashani Uduwage',
-    title: 'Editor-in-Chief',
-    email: 'uduwageh@gmail.com',
-    phone: '+94 77 247 4149',
-    image: '/assets/team/hashani.png',
-    linkedin: 'https://www.linkedin.com/in/hashaniuduwage',
+    name: "Hashani Uduwage",
+    title: "Editors-in-Chief",
+    email: "uduwageh@gmail.com",
+    phone: "+94 77 247 4149",
+    image: "/assets/team/hashani.png",
+    linkedin: "https://www.linkedin.com/in/hashaniuduwage",
   },
   {
-    name: 'Akila Benaragama',
-    title: 'Partnership Coordinator',
-    email: 'akilabenaragama@gmail.com',
-    phone: '+94 77 582 6664',
-    image: '/assets/team/akila.png',
-    linkedin: 'https://www.linkedin.com/in/akilabenaragama',
+    name: "Akila Benaragama",
+    title: "Partnership Coordinator",
+    email: "akilabenaragama@gmail.com",
+    phone: "+94 77 582 6664",
+    image: "/assets/team/akila.png",
+    linkedin: "https://www.linkedin.com/in/akilabenaragama",
   },
   {
-    name: 'Nevindi Munasinghe',
-    title: 'Partnership Coordinator',
-    email: 'nevindimunasinghe@gmail.com',
-    phone: '+94 77 247 4149',
-    image: '/assets/team/nevindi.png',
-    linkedin: 'https://www.linkedin.com/in/nevindimunasinghe',
+    name: "Nevindi Munasinghe",
+    title: "Partnership Coordinator",
+    email: "nevindimunasinghe@gmail.com",
+    phone: "+94 77 247 4149",
+    image: "/assets/team/nevindi.png",
+    linkedin: "https://www.linkedin.com/in/nevindimunasinghe",
   },
 ];
 
@@ -57,7 +57,8 @@ const PartnershipTeam: React.FC = () => {
             </span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            Meet our dedicated partnership team who will work closely with you to ensure your partnership goals are achieved
+            Meet our dedicated partnership team who will work closely with you
+            to ensure your partnership goals are achieved
           </p>
         </div>
 
@@ -70,22 +71,24 @@ const PartnershipTeam: React.FC = () => {
             >
               {/* Background gradient for the entire card */}
               <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900"></div>
-              
+
               {/* Profile Image with Seamless Fade */}
               <div className="relative h-72 overflow-hidden">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
                 {/* Multiple gradient overlays for seamless blend */}
                 <div className="absolute inset-0">
                   {/* Top subtle gradient for depth */}
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/20"></div>
                   {/* Main gradient that matches card background */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/95 via-slate-900/70 to-transparent"
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/95 via-slate-900/70 to-transparent"
                     style={{
-                      background: 'linear-gradient(to top, rgb(15 23 42) 0%, rgb(15 23 42 / 0.95) 25%, rgb(15 23 42 / 0.70) 50%, transparent 100%)'
+                      background:
+                        "linear-gradient(to top, rgb(15 23 42) 0%, rgb(15 23 42 / 0.95) 25%, rgb(15 23 42 / 0.70) 50%, transparent 100%)",
                     }}
                   ></div>
                   {/* Additional gradient for smoother transition */}
@@ -97,8 +100,12 @@ const PartnershipTeam: React.FC = () => {
               <div className="relative z-10 p-6 -mt-20">
                 {/* Name and Title */}
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                  <p className="text-[#e3c767] font-medium text-sm">{member.title}</p>
+                  <h3 className="text-xl font-bold text-white mb-1">
+                    {member.name}
+                  </h3>
+                  <p className="text-[#e3c767] font-medium text-sm">
+                    {member.title}
+                  </p>
                 </div>
 
                 {/* Contact Info */}
@@ -135,8 +142,9 @@ const PartnershipTeam: React.FC = () => {
             </span>
           </h3>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can create a customized partnership that delivers exceptional
-            value for your organization and our university community
+            Let's discuss how we can create a customized partnership that
+            delivers exceptional value for your organization and our university
+            community
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button className="px-8 py-3.5 bg-gradient-to-r from-[#e3c767] to-[#aa7d39] text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-[#e3c767]/20 transition-all">

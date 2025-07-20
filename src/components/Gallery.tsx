@@ -172,7 +172,7 @@ const FloatingCard = ({
   const angleStep = (2 * Math.PI) / totalCards;
   const angle = relativeIndex * angleStep;
 
-  const radius = 300;
+  const radius = 400;
   const x = Math.sin(angle) * radius;
   const z = Math.cos(angle) * radius - radius;
   const rotateY = (angle * 180) / Math.PI;
@@ -184,13 +184,13 @@ const FloatingCard = ({
 
   return (
     <motion.div
-      className="absolute w-72 h-80 cursor-pointer"
+      className="absolute w-96 h-[26rem] cursor-pointer"
       style={{
         transformStyle: "preserve-3d",
         left: "50%",
         top: "50%",
-        marginLeft: "-144px",
-        marginTop: "-160px",
+        marginLeft: "-192px",
+        marginTop: "-208px",
       }}
       animate={{
         transform: `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg)`,
@@ -212,11 +212,11 @@ const FloatingCard = ({
       }}
     >
       <div className="w-full h-full bg-gray-900/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50">
-        <div className="relative h-40 overflow-hidden">
+        <div className="relative h-52 overflow-hidden">
           <motion.img
             src={segment.imageUrl}
             alt={segment.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.3 }}
           />
@@ -230,7 +230,7 @@ const FloatingCard = ({
             />
           )}
         </div>
-        <div className="p-6 flex flex-col justify-between h-40">
+        <div className="p-6 flex flex-col justify-between h-52">
           <div>
             <h3
               className="text-lg font-bold mb-3 text-white line-clamp-2"
@@ -343,14 +343,14 @@ const SegmentModal = ({ segment, onClose }) => {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <div className="flex flex-col min-h-0">
-            <div className="w-full relative flex-shrink-0">
+            <div className="w-full h-80 relative flex-shrink-0">
               <motion.img
                 src={segment.imageUrl}
                 alt={segment.title}
-                className="w-full h-80 object-cover"
-                initial={{ scale: 1.2, filter: "blur(20px)" }}
-                animate={{ scale: 1, filter: "blur(0px)" }}
-                transition={{ duration: 1, delay: 0.2 }}
+                className="w-full h-full object-cover"
+                initial={{ scale: 1.2, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <motion.button
@@ -374,6 +374,7 @@ const SegmentModal = ({ segment, onClose }) => {
                 </svg>
               </motion.button>
             </div>
+            {/* Content Section */}
             <div className="w-full p-8 overflow-y-auto">
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
