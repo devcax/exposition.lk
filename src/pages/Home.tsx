@@ -13,14 +13,14 @@ function Home() {
   return (
     <div className="min-h-screen bg-black">
       <HeroSlider />
-      {/* <EventStructure /> */}
+      {/* <EventStructure /> removed */}
       <Gallery />
       <SpeakerHighlights />
       <InterviewHighlight />
       <Reviews />
       <PartnershipTree />
 
-      {/* <PartnershipPackages /> */}
+      {/* <PartnershipPackages /> removed*/}
       <PartnershipTeam />
       <Footer />
     </div>
