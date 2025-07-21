@@ -1,7 +1,6 @@
-import React from "react";
-import { Quote, Star, Award, Briefcase, Mail } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { Quote, Award, Briefcase, Mail } from "lucide-react";
 
-// Your speakers array remains the same
 const speakers = [
   {
     name: "Dulith Herath",
@@ -58,42 +57,117 @@ const speakers = [
 ];
 
 const AutoScrollingSpeakers = () => {
-  const duplicatedSpeakers = [...speakers, ...speakers];
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>();
+  const isPausedRef = useRef(false);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5; // Reduced speed from 1 to 0.5
+    const containerWidth = scrollContainer.scrollWidth / 2;
+
+    const animate = () => {
+      if (!isPausedRef.current && scrollContainer) {
+        scrollPosition += scrollSpeed;
+
+        if (scrollPosition >= containerWidth) {
+          scrollPosition = 0;
+        }
+
+        scrollContainer.style.transform = `translateX(-${scrollPosition}px)`;
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    isPausedRef.current = true;
+  };
+
+  const handleMouseLeave = () => {
+    isPausedRef.current = false;
+  };
+
+  const SpeakerCard = ({
+    speaker,
+    index,
+  }: {
+    speaker: (typeof speakers)[0];
+    index: number;
+  }) => (
+    <div key={`speaker-${index}`} className="flex-shrink-0 w-80 mx-3 py-4">
+      <div className="bg-gray-800/30 backdrop-blur-xl border border-gray-700 rounded-2xl p-6 h-full transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative">
+        {/* Category Badge */}
+        <div className="flex justify-between items-start mb-4">
+          <span className="px-3 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
+            {speaker.category}
+          </span>
+          <Quote className="h-5 w-5 text-[#e3c767] opacity-50" />
+        </div>
+
+        {/* Speaker Info */}
+        <div className="flex items-center space-x-4 mb-4">
+          <div className="relative">
+            <img
+              className="h-16 w-16 object-cover rounded-full ring-2 ring-gray-600 transition-all duration-300"
+              src={speaker.photo}
+              alt={speaker.name}
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                  speaker.name
+                )}&background=aa7d39&color=000000&size=64&bold=true`;
+              }}
+            />
+            <div className="absolute -bottom-1 -right-1 w-8 h-4 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] rounded-full flex items-center justify-center">
+              <span className="text-black text-xs font-bold">21</span>
+            </div>
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold text-white mb-1 truncate">
+              {speaker.name}
+            </h3>
+            <p className="text-[#aa7d39] text-sm font-medium flex items-center gap-1">
+              <Briefcase className="h-3 w-3 flex-shrink-0" />
+              <span className="truncate">{speaker.designation}</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Quote */}
+        <blockquote className="relative">
+          <p className="text-gray-300 text-sm leading-relaxed pl-4 border-l-2 border-[#aa7d39]/50 italic">
+            "{speaker.exposition}"
+          </p>
+        </blockquote>
+
+        {/* Bottom decoration - Replaced stars with "ISSUE 21" */}
+        <div className="mt-4 pt-3 border-t border-gray-700/50 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <span className="text-[#aa7d39] text-xs font-bold tracking-wider">
+              ISSUE 21
+            </span>
+          </div>
+          <Award className="h-4 w-4 text-[#e3c767] opacity-50" />
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
-      {/* CSS Animation - Add to head */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-          @keyframes autoScroll {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-          
-          .scrolling-container {
-            animation: autoScroll 60s linear infinite;
-            display: flex;
-            width: 200%;
-            gap: 1.5rem;
-          }
-          
-          .scrolling-container:hover {
-            animation-play-state: paused;
-          }
-          
-          .scroll-wrapper {
-            overflow: hidden;
-            width: 100%;
-          }
-        `,
-        }}
-      />
-
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#aa7d39]/20 to-[#e3c767]/10 rounded-full blur-3xl"></div>
@@ -118,74 +192,33 @@ const AutoScrollingSpeakers = () => {
         {/* Auto-scrolling Container */}
         <div className="relative">
           {/* Fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-900 via-gray-900/80 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-900 via-gray-900/90 to-transparent z-30 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-900 via-gray-900/90 to-transparent z-30 pointer-events-none"></div>
 
-          <div className="scroll-wrapper">
-            <div className="scrolling-container">
-              {duplicatedSpeakers.map((speaker, index) => (
-                <div key={`speaker-${index}`} className="flex-shrink-0 w-80">
-                  <div className="bg-gray-800/30 backdrop-blur-xl border border-gray-700 rounded-2xl p-6 h-full transition-all duration-500 hover:scale-105 hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10">
-                    {/* Category Badge */}
-                    <div className="flex justify-between items-start mb-4">
-                      <span className="px-3 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
-                        {speaker.category}
-                      </span>
-                      <Quote className="h-5 w-5 text-[#e3c767] opacity-50" />
-                    </div>
-
-                    {/* Speaker Info */}
-                    <div className="flex items-center space-x-4 mb-4">
-                      <div className="relative">
-                        <img
-                          className="h-16 w-16 object-cover rounded-full ring-2 ring-gray-600 transition-all duration-300"
-                          src={speaker.photo}
-                          alt={speaker.name}
-                          onError={(e) => {
-                            const img = e.currentTarget as HTMLImageElement;
-                            img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                              speaker.name
-                            )}&background=aa7d39&color=000000&size=64&bold=true`;
-                          }}
-                        />
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] rounded-full flex items-center justify-center">
-                          <Star className="h-2.5 w-2.5 text-black" />
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-bold text-white mb-1 truncate">
-                          {speaker.name}
-                        </h3>
-                        <p className="text-[#aa7d39] text-sm font-medium flex items-center gap-1">
-                          <Briefcase className="h-3 w-3 flex-shrink-0" />
-                          <span className="truncate">
-                            {speaker.designation}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Quote */}
-                    <blockquote className="relative">
-                      <p className="text-gray-300 text-sm leading-relaxed pl-4 border-l-2 border-[#aa7d39]/50 italic">
-                        "{speaker.exposition}"
-                      </p>
-                    </blockquote>
-
-                    {/* Bottom decoration */}
-                    <div className="mt-4 pt-3 border-t border-gray-700/50 flex justify-between items-center">
-                      <div className="flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="h-2.5 w-2.5 text-[#aa7d39] fill-current"
-                          />
-                        ))}
-                      </div>
-                      <Award className="h-4 w-4 text-[#e3c767] opacity-50" />
-                    </div>
-                  </div>
-                </div>
+          {/* Scrolling wrapper with better overflow handling */}
+          <div className="overflow-hidden py-2">
+            <div
+              ref={scrollRef}
+              className="flex"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{ width: "max-content" }}
+            >
+              {/* First set of speakers */}
+              {speakers.map((speaker, index) => (
+                <SpeakerCard
+                  key={`first-${index}`}
+                  speaker={speaker}
+                  index={index}
+                />
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {speakers.map((speaker, index) => (
+                <SpeakerCard
+                  key={`second-${index}`}
+                  speaker={speaker}
+                  index={index + speakers.length}
+                />
               ))}
             </div>
           </div>

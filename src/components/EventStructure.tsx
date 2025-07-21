@@ -22,8 +22,6 @@ import industrialWeek from "/assets/Event Structure/Industrial Week.jpg";
 import magazine from "/assets/Event Structure/magazine.jpg";
 import industrialForum from "/assets/Event Structure/industrial forum.jpg";
 
-
-
 const EventStructure = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [activeCategory, setActiveCategory] = useState(0);
@@ -147,28 +145,25 @@ const EventStructure = () => {
     {
       title: "Magazine",
       subtitle: "Read More",
-      image: ma
+      image: magazine,
       category: "magazine",
     },
     {
-      title: "Podcast",
+      title: "Interviews", // This is the interview card
       subtitle: "Read More",
-      image:
-        interviews
+      image: interviews,
       category: "podcast",
     },
     {
       title: "Edify",
       subtitle: "Read More",
-      image:
-       edify
+      image: edify,
       category: "edify",
     },
     {
       title: "Industrial Forum",
       subtitle: "Read More",
-      image:
-        industrialForum
+      image: industrialForum,
       category: "blog",
     },
     {
@@ -355,7 +350,16 @@ const EventStructure = () => {
                 <img
                   src={content.image}
                   alt={content.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${
+                    content.title === "Interviews"
+                      ? "object-cover object-center"
+                      : "object-cover"
+                  }`}
+                  style={
+                    content.title === "Interviews"
+                      ? { objectPosition: "center center" }
+                      : {}
+                  }
                 />
 
                 {/* Gradient Overlay */}
@@ -380,89 +384,6 @@ const EventStructure = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-// --- FLOATING CARD COMPONENT ---
-const FloatingCard = ({
-  segment,
-  onReadMore,
-  index,
-  activeIndex,
-  onClick,
-  totalCards,
-}) => {
-  const relativeIndex = index - activeIndex;
-  const angleStep = (2 * Math.PI) / totalCards;
-  const angle = relativeIndex * angleStep;
-
-  const radius = 400;
-  const x = Math.sin(angle) * radius;
-  const z = Math.cos(angle) * radius - radius;
-  const rotateY = (angle * 180) / Math.PI;
-
-  const distanceFromCenter = Math.abs(relativeIndex);
-  const opacity = 1 - distanceFromCenter * 0.25;
-  const isActive = index === activeIndex;
-
-  return (
-    <motion.div
-      className="absolute w-96 h-[26rem] cursor-pointer"
-      style={{
-        transformStyle: "preserve-3d",
-        left: "50%",
-        top: "50%",
-        marginLeft: "-192px",
-        marginTop: "-208px",
-      }}
-      animate={{
-        transform: `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg)`,
-        opacity: isActive ? 1 : opacity,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      }}
-      onClick={onClick}
-    >
-      <div className="w-full h-full bg-gray-900/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl border border-gray-700/50">
-        <div className="relative h-52 overflow-hidden">
-          <motion.img
-            src={segment.imageUrl}
-            alt={segment.title}
-            className="w-full h-full object-cover rounded-t-2xl"
-            initial={{ scale: 1.2 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.7 }}
-          />
-        </div>
-        <div className="p-6 flex flex-col justify-between h-52">
-          <div>
-            <h3
-              className="text-lg font-bold mb-3 text-white line-clamp-2"
-              style={{ WebkitLineClamp: 2, overflow: "hidden" }}
-            >
-              {segment.title}
-            </h3>
-            <p className="text-sm text-gray-400 line-clamp-3">
-              {segment.description}
-            </p>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="text-xs text-gray-500">
-              {segment.date} • {segment.category}
-            </div>
-            <button
-              onClick={onReadMore}
-              className="text-xs font-semibold text-[#aa7d39] hover:underline"
-            >
-              Read More
-            </button>
-          </div>
-        </div>
-      </div>
-    </motion.div>
   );
 };
 
