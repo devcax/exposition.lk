@@ -12,7 +12,6 @@ import InterviewHighlight from "../components/InterviewHighlight";
 function Home() {
   return (
     <div className="min-h-screen bg-black">
-      <Header />
       <HeroSlider />
       {/* <EventStructure /> */}
       <Gallery />
