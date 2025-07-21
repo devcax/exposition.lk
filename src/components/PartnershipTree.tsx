@@ -8,12 +8,24 @@ import {
   ChevronRight,
   X,
   ArrowRight,
+  Camera,
+  Printer,
+  Monitor,
+  Coffee,
+  Handshake,
+  Users,
+  Building2,
 } from "lucide-react";
 import PartnershipSummary from "./PartnershipSummary";
 
-// New GradientIcon component to handle SVG gradient fills
+// Fixed GradientIcon component with fallback
 const GradientIcon = ({ id, children, fromColor, toColor }) => {
   const gradientId = `grad-${id}`;
+
+  // Fallback for missing gradient colors
+  const fallbackFromColor = fromColor || "#aa7d39";
+  const fallbackToColor = toColor || "#e3c767";
+
   return (
     <>
       <svg width="0" height="0" style={{ position: "absolute" }}>
@@ -21,11 +33,11 @@ const GradientIcon = ({ id, children, fromColor, toColor }) => {
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop
               offset="0%"
-              style={{ stopColor: fromColor, stopOpacity: 1 }}
+              style={{ stopColor: fallbackFromColor, stopOpacity: 1 }}
             />
             <stop
               offset="100%"
-              style={{ stopColor: toColor, stopOpacity: 1 }}
+              style={{ stopColor: fallbackToColor, stopOpacity: 1 }}
             />
           </linearGradient>
         </defs>
@@ -116,7 +128,7 @@ const PartnershipTree: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   const categories = [
-    { label: "Monetary Partners", key: "monetary", count: 6 },
+    { label: "Monetary Partners", key: "monetary", count: 5 },
     { label: "Career Fair Partners", key: "career", count: 2 },
     { label: "Resource Partners", key: "resource", count: 5 },
   ] as const;
@@ -139,6 +151,8 @@ const PartnershipTree: React.FC = () => {
           "Speaking slot at all major events",
           "VIP access to exclusive networking events",
           "Board meeting attendance rights",
+          "Priority booth placement at career fair",
+          "Access to alumni database",
         ],
       },
       {
@@ -156,6 +170,8 @@ const PartnershipTree: React.FC = () => {
           "Quarterly magazine features",
           "Event speaking opportunities",
           "Research collaboration opportunities",
+          "Career fair participation",
+          "Student mentorship programs",
         ],
       },
       {
@@ -173,6 +189,7 @@ const PartnershipTree: React.FC = () => {
           "Event participation opportunities",
           "Career fair participation",
           "Alumni network access",
+          "Workshop hosting opportunities",
         ],
       },
       {
@@ -185,6 +202,12 @@ const PartnershipTree: React.FC = () => {
         investment: "Rs 150,000",
         description:
           "Growing partnership with development potential and meaningful engagement opportunities",
+        benefits: [
+          "Website logo placement",
+          "Social media mentions",
+          "Career fair access",
+          "Newsletter features",
+        ],
       },
       {
         id: "bronze",
@@ -196,75 +219,146 @@ const PartnershipTree: React.FC = () => {
         investment: "Rs 100,000",
         description:
           "Entry-level partnership with growth opportunities and community engagement",
+        benefits: [
+          "Social media recognition",
+          "Event acknowledgment",
+          "Basic networking access",
+          "Newsletter mentions",
+        ],
       },
     ],
     career: [
       {
-        id: "premium",
-        level: "Premium Partner",
-        icon: <Crown />,
-        color: "from-[#e3c767] to-[#aa7d39]",
+        id: "premium-career",
+        level: "Premium Career Partner",
+        icon: <Building2 />,
+        iconGradient: ["#e3c767", "#aa7d39"],
+        color: "from-[#e3c767]/20 to-[#aa7d39]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
         investment: "Rs 100,000",
         description:
-          "Premium booth placement, priority access to students, and enhanced visibility",
+          "Premium booth placement, priority access to students, and enhanced visibility at career fair",
+        benefits: [
+          "Prime booth location (corner/center)",
+          "Priority student interaction sessions",
+          "Pre-event student resume access",
+          "Company presentation slot",
+          "VIP networking lunch access",
+          "Post-event candidate database",
+          "Logo on all career fair materials",
+          "Social media promotion",
+        ],
       },
       {
-        id: "standard",
-        level: "Standard Partner",
-        icon: <Star />,
-        color: "from-[#aa7d39] to-[#B78F5A]",
+        id: "standard-career",
+        level: "Standard Career Partner",
+        icon: <Users />,
+        iconGradient: ["#aa7d39", "#B78F5A"],
+        color: "from-[#aa7d39]/20 to-[#B78F5A]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
         investment: "Rs 50,000",
         description:
           "Standard booth space, student interaction opportunities, and networking access",
+        benefits: [
+          "Standard booth space",
+          "Student interaction sessions",
+          "Company brochure distribution",
+          "Basic networking access",
+          "Event acknowledgment",
+          "Social media mentions",
+        ],
       },
     ],
     resource: [
       {
         id: "printing",
         level: "Printing Partner",
-        icon: <Award />,
-        color: "from-[#aa7d39] to-[#e3c767]",
+        icon: <Printer />,
+        iconGradient: ["#aa7d39", "#e3c767"],
+        color: "from-[#aa7d39]/20 to-[#e3c767]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
         description:
           "High-quality printing services for magazines and promotional materials",
+        benefits: [
+          "Magazine printing partnership",
+          "Event material printing",
+          "Banner and poster production",
+          "Marketing collateral design",
+          "Brand visibility on printed materials",
+          "Social media recognition",
+        ],
       },
       {
         id: "photography",
         level: "Photography Partner",
-        icon: <Gem />,
-        color: "from-[#e3c767] to-[#B78F5A]",
+        icon: <Camera />,
+        iconGradient: ["#e3c767", "#B78F5A"],
+        color: "from-[#e3c767]/20 to-[#B78F5A]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
         description:
           "Professional photography coverage for events and content creation",
+        benefits: [
+          "Event photography coverage",
+          "Portrait sessions for magazine",
+          "Social media content creation",
+          "Brand photography opportunities",
+          "Portfolio building collaboration",
+          "Photo credit recognition",
+        ],
       },
       {
         id: "digital",
         level: "Digital Media Partner",
-        icon: <Shield />,
-        color: "from-[#B78F5A] to-[#aa7d39]",
+        icon: <Monitor />,
+        iconGradient: ["#B78F5A", "#aa7d39"],
+        color: "from-[#B78F5A]/20 to-[#aa7d39]/20",
         bgColor: "rgba(183, 143, 90, 0.1)",
         description:
           "Digital marketing, social media strategy, and content optimization",
+        benefits: [
+          "Social media management",
+          "Digital marketing campaigns",
+          "Website development support",
+          "Content creation collaboration",
+          "SEO optimization services",
+          "Analytics and reporting",
+        ],
       },
       {
         id: "food",
         level: "Food & Beverage Partner",
-        icon: <Star />,
-        color: "from-[#aa7d39] to-[#e3c767]",
+        icon: <Coffee />,
+        iconGradient: ["#aa7d39", "#e3c767"],
+        color: "from-[#aa7d39]/20 to-[#e3c767]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
         description:
           "Catering services for events, workshops, and networking sessions",
+        benefits: [
+          "Event catering services",
+          "Workshop refreshment sponsorship",
+          "VIP networking lunch provision",
+          "Brand visibility at events",
+          "Menu customization opportunities",
+          "Sustainability partnership",
+        ],
       },
       {
         id: "copartner",
-        level: "Co Partner",
-        icon: <Crown />,
-        color: "from-[#e3c767] to-[#B78F5A]",
+        level: "Strategic Co-Partner",
+        icon: <Handshake />,
+        iconGradient: ["#e3c767", "#B78F5A"],
+        color: "from-[#e3c767]/20 to-[#B78F5A]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
         description:
           "Collaborative partnerships for mutual benefit and shared initiatives",
+        benefits: [
+          "Joint event collaboration",
+          "Shared resource access",
+          "Co-branding opportunities",
+          "Cross-promotion benefits",
+          "Knowledge sharing sessions",
+          "Innovation lab partnerships",
+        ],
       },
     ],
   };
@@ -272,6 +366,12 @@ const PartnershipTree: React.FC = () => {
   const handleSelectPartnership = (partnership: Partnership) => {
     setSelectedPartnership(partnership);
     setShowModal(true);
+  };
+
+  // Reset selection when switching tabs
+  const handleTabChange = (newTab: typeof activeTab) => {
+    setActiveTab(newTab);
+    setSelectedPartnership(null);
   };
 
   return (
@@ -299,7 +399,7 @@ const PartnershipTree: React.FC = () => {
             {categories.map((cat) => (
               <button
                 key={cat.key}
-                onClick={() => setActiveTab(cat.key)}
+                onClick={() => handleTabChange(cat.key)}
                 className={`flex-1 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeTab === cat.key
                     ? "bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black shadow-lg"
@@ -333,70 +433,65 @@ const PartnershipTree: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="sticky top-8 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 p-6">
               <h3 className="text-xl font-semibold text-white mb-4">
-                Partnership Benefits
+                Partnership Proposal
               </h3>
-              {selectedPartnership ? (
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className={`p-3 rounded-lg bg-gradient-to-br ${selectedPartnership.color}`}
-                    >
-                      <div className="h-6 w-6">
-                        <GradientIcon
-                          id={`selected-${selectedPartnership.id}`}
-                          fromColor={selectedPartnership.iconGradient[0]}
-                          toColor={selectedPartnership.iconGradient[1]}
-                        >
-                          {selectedPartnership.icon}
-                        </GradientIcon>
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white">
-                        {selectedPartnership.level}
-                      </h4>
-                      {selectedPartnership.investment && (
-                        <p className="text-[#e3c767]">
-                          {selectedPartnership.investment}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <p className="text-gray-400 mb-4">
-                    {selectedPartnership.description}
-                  </p>
-                  {selectedPartnership.benefits && (
-                    <ul className="space-y-2">
-                      {selectedPartnership.benefits
-                        .slice(0, 4)
-                        .map((benefit, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start gap-2 text-sm text-gray-300"
-                          >
-                            <ChevronRight className="w-4 h-4 text-[#e3c767] mt-0.5 flex-shrink-0" />
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                    </ul>
-                  )}
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="mt-6 w-full py-3 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-[#e3c767]/20 transition-all"
-                  >
-                    View Full Details
-                  </button>
+
+              <p className="text-gray-400 mb-6">
+                Download our comprehensive partnership proposal containing all
+                available packages, benefits, and collaboration opportunities.
+              </p>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <ChevronRight className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                  <span>All partnership tiers & pricing</span>
                 </div>
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-gray-500 mb-4">
-                    Select a partnership package to view details
-                  </p>
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gray-800 flex items-center justify-center">
-                    <Award className="w-8 h-8 text-gray-600" />
-                  </div>
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <ChevronRight className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                  <span>Detailed benefits breakdown</span>
                 </div>
-              )}
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <ChevronRight className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                  <span>Terms & conditions</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <ChevronRight className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                  <span>Application process guide</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-300">
+                  <ChevronRight className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                  <span>Contact information</span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  // Add download logic here
+                  console.log("Downloading: Partnership_Proposal_Complete.pdf");
+                  // You can replace this with actual download logic
+                }}
+                className="w-full py-3 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-[#e3c767]/20 transition-all flex items-center justify-center gap-2"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                Download Complete Proposal
+              </button>
+
+              {/* Optional: Show file size and format */}
+              <p className="text-gray-500 text-xs text-center mt-2">
+                PDF • 2.3 MB • Updated Dec 2024
+              </p>
             </div>
 
             {/* Contact CTA */}
