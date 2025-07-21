@@ -15,6 +15,11 @@ import {
   Handshake,
   Users,
   Building2,
+  Briefcase,
+  Zap,
+  Palette,
+  Globe,
+  Target,
 } from "lucide-react";
 import PartnershipSummary from "./PartnershipSummary";
 
@@ -60,6 +65,13 @@ type Partnership = {
   investment?: string;
   description: string;
   benefits?: string[];
+  detailedContent?: {
+    recognition?: string;
+    sections?: {
+      title: string;
+      items: string[];
+    }[];
+  };
 };
 
 interface PartnershipCardProps {
@@ -75,50 +87,110 @@ const PartnershipCard: React.FC<PartnershipCardProps> = ({
 }) => (
   <div
     onClick={onSelect}
-    className={`relative bg-gray-900/40 backdrop-blur-sm border rounded-xl p-6 cursor-pointer transition-all duration-300 ${
+    className={`relative bg-gray-900/40 backdrop-blur-sm border rounded-xl p-6 cursor-pointer transition-all duration-500 transform hover:scale-[1.02] group ${
       isSelected
-        ? "border-[#e3c767] shadow-lg shadow-[#e3c767]/20"
-        : "border-gray-800 hover:border-gray-700"
+        ? "border-[#e3c767] shadow-lg shadow-[#e3c767]/20 scale-[1.02]"
+        : "border-gray-800 hover:border-[#e3c767]/60 hover:shadow-xl hover:shadow-[#e3c767]/30"
     }`}
+    style={{
+      background: isSelected
+        ? "linear-gradient(135deg, rgba(227, 199, 103, 0.05), rgba(170, 125, 57, 0.05))"
+        : undefined,
+    }}
   >
-    <div className="flex items-start justify-between mb-4">
-      <div className="flex items-center gap-3">
-        <div
-          className={`p-3 rounded-lg bg-gradient-to-br ${partnership.color}`}
-        >
-          <div className="h-6 w-6">
-            <GradientIcon
-              id={partnership.id}
-              fromColor={partnership.iconGradient[0]}
-              toColor={partnership.iconGradient[1]}
-            >
-              {partnership.icon}
-            </GradientIcon>
+    {/* Glowing border animation on hover */}
+    <div
+      className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+        !isSelected
+          ? "bg-gradient-to-r from-[#e3c767]/20 via-[#aa7d39]/20 to-[#e3c767]/20 blur-xl"
+          : ""
+      }`}
+    />
+
+    {/* Inner glow effect */}
+    <div
+      className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+        !isSelected ? "shadow-inner shadow-[#e3c767]/10" : ""
+      }`}
+    />
+
+    <div className="relative z-10">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div
+            className={`p-3 rounded-lg bg-gradient-to-br ${partnership.color} transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#e3c767]/30`}
+          >
+            <div className="h-6 w-6 transition-transform duration-500 group-hover:rotate-12">
+              <GradientIcon
+                id={partnership.id}
+                fromColor={partnership.iconGradient[0]}
+                toColor={partnership.iconGradient[1]}
+              >
+                {partnership.icon}
+              </GradientIcon>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-lg font-semibold text-white transition-all duration-300 group-hover:text-[#e3c767]">
+              {partnership.level}
+            </h4>
+            {partnership.investment && (
+              <p className="text-[#e3c767] font-medium transition-all duration-300 group-hover:text-[#aa7d39]">
+                {partnership.investment}
+              </p>
+            )}
           </div>
         </div>
-        <div>
-          <h4 className="text-lg font-semibold text-white">
-            {partnership.level}
-          </h4>
-          {partnership.investment && (
-            <p className="text-[#e3c767] font-medium">
-              {partnership.investment}
-            </p>
-          )}
+        <div
+          className={`p-2 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-45 ${
+            isSelected
+              ? "bg-[#e3c767]/20 text-[#e3c767] shadow-lg shadow-[#e3c767]/30"
+              : "bg-gray-800 text-gray-600 group-hover:bg-[#e3c767]/20 group-hover:text-[#e3c767] group-hover:shadow-lg group-hover:shadow-[#e3c767]/30"
+          }`}
+        >
+          <ArrowRight className="w-4 h-4" />
         </div>
       </div>
-      <ArrowRight
-        className={`w-5 h-5 transition-colors ${
-          isSelected ? "text-[#e3c767]" : "text-gray-600"
-        }`}
-      />
+
+      <p className="text-gray-400 text-sm line-clamp-2 mb-4 transition-colors duration-300 group-hover:text-gray-300">
+        {partnership.description}
+      </p>
+
+      {/* Enhanced Premium Read More Button */}
+      <div className="mt-auto">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect();
+          }}
+          className={`w-full py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-500 transform flex items-center justify-center gap-2 group-button overflow-hidden relative ${
+            isSelected
+              ? "bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black shadow-lg hover:shadow-xl hover:shadow-[#e3c767]/40 scale-105"
+              : "bg-gray-800/50 text-gray-300 border border-gray-700 hover:bg-gradient-to-r hover:from-[#aa7d39]/80 hover:to-[#e3c767]/80 hover:border-[#e3c767] hover:text-black hover:shadow-lg hover:shadow-[#e3c767]/30 hover:scale-105"
+          }`}
+        >
+          {/* Shimmer effect for non-selected buttons */}
+          {!isSelected && (
+            <div className="absolute inset-0 -translate-x-full group-button-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          )}
+
+          <span className="relative z-10 transition-all duration-300">
+            Read More
+          </span>
+          <ChevronRight
+            className={`w-4 h-4 transition-all duration-500 transform group-button-hover:translate-x-1 relative z-10 ${
+              isSelected
+                ? "text-black"
+                : "text-gray-400 group-button-hover:text-black"
+            }`}
+          />
+        </button>
+      </div>
     </div>
-    <p className="text-gray-400 text-sm line-clamp-2">
-      {partnership.description}
-    </p>
   </div>
 );
 
+// Enhanced Modal with loading animation
 const PartnershipTree: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
     "monetary" | "career" | "resource"
@@ -126,6 +198,7 @@ const PartnershipTree: React.FC = () => {
   const [selectedPartnership, setSelectedPartnership] =
     useState<Partnership | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
 
   const categories = [
     { label: "Monetary Partners", key: "monetary", count: 5 },
@@ -133,6 +206,7 @@ const PartnershipTree: React.FC = () => {
     { label: "Resource Partners", key: "resource", count: 5 },
   ] as const;
 
+  // Enhanced partnership data with detailed modal content
   const partnerships: Record<typeof activeTab, Partnership[]> = {
     monetary: [
       {
@@ -154,6 +228,40 @@ const PartnershipTree: React.FC = () => {
           "Priority booth placement at career fair",
           "Access to alumni database",
         ],
+        detailedContent: {
+          recognition:
+            "The recognition will be given as the 'Official Title Partner' for Exposition Issue 21, Edify and Industrial Week 2025/26.",
+          sections: [
+            {
+              title: "Industrial Week & Career Fair 2025/26",
+              items: [
+                "Featuring the company logo on all event materials, including banners, interactive sessions, and promotional items throughout Industrial Week and the Career Fair.",
+                "Ability to distribute company-branded merchandise such as pens, notebooks, tote bags, or brochures to all event attendees throughout Industrial Week and Career Fair.",
+                "Opportunity to conduct sessions or promotional activities throughout the day, offering extensive engagement without time limitations.",
+                "A prime location booth at the Career Fair, ensuring maximum visibility and engagement.",
+                "Full access to a curated digital resume book of all student attendees, enabling efficient post-event recruitment.",
+                "Branding on session slides and all e-certificates shared digitally by students, particularly on platforms like LinkedIn which is an excellent source of organic visibility.",
+                "Entry into an exclusive networking lounge where company representatives can engage directly with top-performing students and key university figures.",
+                "A professionally designed, sponsor-branded email to be sent to all participants. Can include job/internship ads, company story, calls to action.",
+                "Access to place a Sponsor-branded selfie/photo booth where attendees can take pictures and share them on social media, furthering brand exposure.",
+              ],
+            },
+            {
+              title: "Exposition Magazine Launching Ceremony",
+              items: [
+                "Opportunity to deliver a speech for a total time duration of 10 minutes.",
+                "Display a promotional video during the event for a total duration of 5 minutes.",
+                "Privilege to display 8 banners at the event venue to enhance brand visibility.",
+              ],
+            },
+            {
+              title: "Edify Blog",
+              items: [
+                "The company logo will be displayed in the partnerships' corner of the blog footer.",
+              ],
+            },
+          ],
+        },
       },
       {
         id: "platinum",
@@ -173,6 +281,39 @@ const PartnershipTree: React.FC = () => {
           "Career fair participation",
           "Student mentorship programs",
         ],
+        detailedContent: {
+          recognition:
+            "Recognition as 'Platinum Partner' across all Exposition initiatives and events.",
+          sections: [
+            {
+              title: "Industrial Week & Career Fair 2025/26",
+              items: [
+                "Company logo placement on event materials and promotional items.",
+                "Standard booth location at the Career Fair with professional setup.",
+                "Access to student resume database for recruitment purposes.",
+                "Opportunity to conduct 2-hour interactive sessions or workshops.",
+                "Branded merchandise distribution during events.",
+                "Professional networking opportunities with students and faculty.",
+              ],
+            },
+            {
+              title: "Exposition Magazine",
+              items: [
+                "Quarterly feature articles about company initiatives and achievements.",
+                "Logo placement in magazine advertisements section.",
+                "Opportunity to sponsor specific magazine sections.",
+              ],
+            },
+            {
+              title: "Digital Presence",
+              items: [
+                "Company profile on Exposition website partnerships page.",
+                "Social media mentions and features throughout the year.",
+                "Newsletter inclusions and digital marketing support.",
+              ],
+            },
+          ],
+        },
       },
       {
         id: "gold",
@@ -231,7 +372,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "premium-career",
         level: "Premium Career Partner",
-        icon: <Building2 />,
+        icon: <Crown />, // Premium crown icon like Title Partner
         iconGradient: ["#e3c767", "#aa7d39"],
         color: "from-[#e3c767]/20 to-[#aa7d39]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
@@ -248,11 +389,46 @@ const PartnershipTree: React.FC = () => {
           "Logo on all career fair materials",
           "Social media promotion",
         ],
+        detailedContent: {
+          recognition:
+            "Premium positioning as a leading career partner for Industrial Week & Career Fair 2025/26.",
+          sections: [
+            {
+              title: "Career Fair Benefits",
+              items: [
+                "Prime corner or center booth location ensuring maximum student traffic.",
+                "Priority 30-minute presentation slot during main career fair program.",
+                "Pre-event access to anonymized student resumes and portfolios.",
+                "Dedicated company page in the career fair digital brochure.",
+                "VIP access to networking lunch with top-performing students and faculty.",
+                "Post-event detailed analytics and candidate contact information.",
+              ],
+            },
+            {
+              title: "Student Engagement",
+              items: [
+                "Priority scheduling for student interaction sessions.",
+                "Access to mock interview sessions with interested candidates.",
+                "Opportunity to conduct skills assessment workshops.",
+                "Direct communication channel with student placement office.",
+              ],
+            },
+            {
+              title: "Marketing & Promotion",
+              items: [
+                "Company logo on all career fair promotional materials.",
+                "Social media promotion across university platforms.",
+                "Featured company spotlight in pre-event marketing campaigns.",
+                "Professional photography coverage of your booth and activities.",
+              ],
+            },
+          ],
+        },
       },
       {
         id: "standard-career",
         level: "Standard Career Partner",
-        icon: <Users />,
+        icon: <Briefcase />, // Professional briefcase icon
         iconGradient: ["#aa7d39", "#B78F5A"],
         color: "from-[#aa7d39]/20 to-[#B78F5A]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
@@ -273,7 +449,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "printing",
         level: "Printing Partner",
-        icon: <Printer />,
+        icon: <Gem />, // Premium gem icon like Platinum
         iconGradient: ["#aa7d39", "#e3c767"],
         color: "from-[#aa7d39]/20 to-[#e3c767]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
@@ -291,7 +467,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "photography",
         level: "Photography Partner",
-        icon: <Camera />,
+        icon: <Star />, // Premium star icon like Gold
         iconGradient: ["#e3c767", "#B78F5A"],
         color: "from-[#e3c767]/20 to-[#B78F5A]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
@@ -309,7 +485,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "digital",
         level: "Digital Media Partner",
-        icon: <Monitor />,
+        icon: <Zap />, // Dynamic lightning icon for digital/tech
         iconGradient: ["#B78F5A", "#aa7d39"],
         color: "from-[#B78F5A]/20 to-[#aa7d39]/20",
         bgColor: "rgba(183, 143, 90, 0.1)",
@@ -327,7 +503,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "food",
         level: "Food & Beverage Partner",
-        icon: <Coffee />,
+        icon: <Shield />, // Premium shield icon like Silver
         iconGradient: ["#aa7d39", "#e3c767"],
         color: "from-[#aa7d39]/20 to-[#e3c767]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
@@ -345,7 +521,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "copartner",
         level: "Strategic Co-Partner",
-        icon: <Handshake />,
+        icon: <Target />, // Premium target icon for strategic partnerships
         iconGradient: ["#e3c767", "#B78F5A"],
         color: "from-[#e3c767]/20 to-[#B78F5A]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
@@ -364,8 +540,21 @@ const PartnershipTree: React.FC = () => {
   };
 
   const handleSelectPartnership = (partnership: Partnership) => {
+    setModalLoading(true);
     setSelectedPartnership(partnership);
-    setShowModal(true);
+
+    // Simulate loading time for enhanced UX
+    setTimeout(() => {
+      setShowModal(true);
+      setModalLoading(false);
+    }, 300);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setTimeout(() => {
+      setSelectedPartnership(null);
+    }, 300);
   };
 
   // Reset selection when switching tabs
@@ -377,9 +566,15 @@ const PartnershipTree: React.FC = () => {
   return (
     <section
       id="partnerships"
-      className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900"
+      className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Animated background particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#e3c767]/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#aa7d39]/5 rounded-full blur-3xl animate-pulse delay-1000" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold mb-4">
@@ -418,13 +613,18 @@ const PartnershipTree: React.FC = () => {
           {/* Cards Section */}
           <div className="lg:col-span-2">
             <div className="grid md:grid-cols-2 gap-4">
-              {partnerships[activeTab].map((partnership) => (
-                <PartnershipCard
+              {partnerships[activeTab].map((partnership, index) => (
+                <div
                   key={partnership.id}
-                  partnership={partnership}
-                  onSelect={() => handleSelectPartnership(partnership)}
-                  isSelected={selectedPartnership?.id === partnership.id}
-                />
+                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="animate-fade-in-up"
+                >
+                  <PartnershipCard
+                    partnership={partnership}
+                    onSelect={() => handleSelectPartnership(partnership)}
+                    isSelected={selectedPartnership?.id === partnership.id}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -509,88 +709,287 @@ const PartnershipTree: React.FC = () => {
           </div>
         </div>
 
-        {/* Modal */}
-        {showModal && selectedPartnership && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-            <div className="bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color}`}
-                    >
-                      <div className="h-8 w-8">
-                        <GradientIcon
-                          id={`modal-${selectedPartnership.id}`}
-                          fromColor={selectedPartnership.iconGradient[0]}
-                          toColor={selectedPartnership.iconGradient[1]}
-                        >
-                          {selectedPartnership.icon}
-                        </GradientIcon>
+        {/* Enhanced Modal with animations */}
+        {(showModal || modalLoading) && selectedPartnership && (
+          <div
+            className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-500 ${
+              showModal ? "bg-black/80 backdrop-blur-sm" : "bg-black/20"
+            }`}
+          >
+            <div
+              className={`bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transition-all duration-500 transform ${
+                showModal
+                  ? "scale-100 opacity-100 translate-y-0"
+                  : "scale-95 opacity-0 translate-y-4"
+              }`}
+            >
+              {modalLoading ? (
+                // Loading state
+                <div className="p-8 flex items-center justify-center min-h-[400px]">
+                  <div className="text-center">
+                    <div className="relative w-16 h-16 mx-auto mb-4">
+                      <div className="absolute inset-0 border-4 border-gray-600 rounded-full animate-spin border-t-[#e3c767]" />
+                      <div className="absolute inset-2 border-2 border-gray-700 rounded-full animate-spin animate-reverse border-t-[#aa7d39]" />
+                    </div>
+                    <p className="text-gray-400 animate-pulse">
+                      Loading partnership details...
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                // Modal content with entrance animations
+                <div className="p-8 animate-fade-in">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-center gap-4 animate-slide-in-left">
+                      <div
+                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 animate-bounce-in`}
+                      >
+                        <div className="h-8 w-8">
+                          <GradientIcon
+                            id={`modal-${selectedPartnership.id}`}
+                            fromColor={selectedPartnership.iconGradient[0]}
+                            toColor={selectedPartnership.iconGradient[1]}
+                          >
+                            {selectedPartnership.icon}
+                          </GradientIcon>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-3xl font-bold text-white animate-slide-in-right">
+                          {selectedPartnership.level}
+                        </h3>
+                        {selectedPartnership.investment && (
+                          <p className="text-[#e3c767] text-xl font-semibold animate-slide-in-right delay-100">
+                            {selectedPartnership.investment}
+                          </p>
+                        )}
                       </div>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white">
-                        {selectedPartnership.level}
-                      </h3>
-                      {selectedPartnership.investment && (
-                        <p className="text-[#e3c767] text-lg">
-                          {selectedPartnership.investment}
-                        </p>
+                    <button
+                      onClick={closeModal}
+                      className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 animate-fade-in"
+                    >
+                      <X className="w-6 h-6" />
+                    </button>
+                  </div>
+
+                  {/* Recognition Statement with animation */}
+                  {selectedPartnership.detailedContent?.recognition && (
+                    <div className="mb-8 p-6 bg-gradient-to-r from-[#aa7d39]/10 to-[#e3c767]/10 rounded-xl border border-[#aa7d39]/30 animate-slide-in-up delay-200">
+                      <h4 className="text-lg font-semibold text-[#e3c767] mb-3">
+                        Partnership Recognition
+                      </h4>
+                      <p className="text-gray-300 leading-relaxed">
+                        {selectedPartnership.detailedContent.recognition}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Detailed Sections with staggered animations */}
+                  {selectedPartnership.detailedContent?.sections && (
+                    <div className="space-y-8">
+                      {selectedPartnership.detailedContent.sections.map(
+                        (section, sectionIdx) => (
+                          <div
+                            key={sectionIdx}
+                            className="bg-gray-800/30 rounded-xl p-6 border border-gray-700 animate-slide-in-up"
+                            style={{
+                              animationDelay: `${(sectionIdx + 3) * 100}ms`,
+                            }}
+                          >
+                            <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                              <div className="w-2 h-2 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] rounded-full animate-pulse" />
+                              {section.title}
+                            </h4>
+                            <ul className="space-y-3">
+                              {section.items.map((item, itemIdx) => (
+                                <li
+                                  key={itemIdx}
+                                  className="flex items-start gap-3 text-gray-300 leading-relaxed animate-fade-in"
+                                  style={{
+                                    animationDelay: `${
+                                      (sectionIdx + 3) * 100 + itemIdx * 50
+                                    }ms`,
+                                  }}
+                                >
+                                  <div className="w-5 h-5 rounded-full bg-[#e3c767]/20 flex items-center justify-center flex-shrink-0 mt-1 transition-all duration-300 hover:bg-[#e3c767]/30 hover:scale-110">
+                                    <ChevronRight className="w-3 h-3 text-[#e3c767]" />
+                                  </div>
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )
                       )}
                     </div>
+                  )}
+
+                  {/* Fallback to original benefits if no detailed content */}
+                  {!selectedPartnership.detailedContent &&
+                    selectedPartnership.benefits && (
+                      <div className="mb-8">
+                        <h4 className="text-lg font-semibold text-white mb-4">
+                          Included Benefits
+                        </h4>
+                        <ul className="space-y-3">
+                          {selectedPartnership.benefits.map((benefit, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-3 text-gray-300"
+                            >
+                              <div className="w-6 h-6 rounded-full bg-[#e3c767]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <ChevronRight className="w-4 h-4 text-[#e3c767]" />
+                              </div>
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-4 mt-8 pt-6 border-t border-gray-700 animate-slide-in-up delay-500">
+                    <button className="flex-1 py-4 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-xl hover:shadow-xl hover:shadow-[#e3c767]/30 transition-all duration-500 text-lg transform hover:scale-105 relative overflow-hidden group">
+                      <span className="relative z-10">Become a Partner</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#e3c767] to-[#aa7d39] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </button>
+                    <button
+                      onClick={closeModal}
+                      className="px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-xl transition-all duration-300 hover:scale-105"
+                    >
+                      Close
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setShowModal(false)}
-                    className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
                 </div>
-
-                <p className="text-gray-300 mb-6">
-                  {selectedPartnership.description}
-                </p>
-
-                {selectedPartnership.benefits && (
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-4">
-                      Included Benefits
-                    </h4>
-                    <ul className="space-y-3 mb-8">
-                      {selectedPartnership.benefits.map((benefit, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-3 text-gray-300"
-                        >
-                          <div className="w-6 h-6 rounded-full bg-[#e3c767]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <ChevronRight className="w-4 h-4 text-[#e3c767]" />
-                          </div>
-                          <span>{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="flex gap-4">
-                  <button className="flex-1 py-3 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-[#e3c767]/20 transition-all">
-                    Become a Partner
-                  </button>
-                  <button
-                    onClick={() => setShowModal(false)}
-                    className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         )}
 
         <PartnershipSummary />
       </div>
+
+      {/* Add custom CSS for animations */}
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slide-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slide-in-right {
+          from {
+            opacity: 0;
+            transform: translateX(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slide-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bounce-in {
+          0% {
+            opacity: 0;
+            transform: scale(0.3);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.1);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-slide-in-left {
+          animation: slide-in-left 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-slide-in-right {
+          animation: slide-in-right 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-slide-in-up {
+          animation: slide-in-up 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-bounce-in {
+          animation: bounce-in 0.8s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.4s ease-out forwards;
+          opacity: 0;
+        }
+
+        .delay-100 {
+          animation-delay: 100ms;
+        }
+
+        .delay-200 {
+          animation-delay: 200ms;
+        }
+
+        .delay-500 {
+          animation-delay: 500ms;
+        }
+
+        .group-button-hover:hover .group-button-hover\:translate-x-full {
+          transform: translateX(100%);
+        }
+
+        .animate-reverse {
+          animation-direction: reverse;
+        }
+      `}</style>
     </section>
   );
 };
