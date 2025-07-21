@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const slide1 = "/assets/Main Slider/slide1.jpg";
 const slide2 = "/assets/Main Slider/slide2.jpg";
@@ -34,6 +35,11 @@ const HeroSlider = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const navigate = useNavigate();
+  const handleLegacyClick = () => {
+    navigate("/legacy");
   };
 
   return (
@@ -103,7 +109,7 @@ const HeroSlider = () => {
               </a>
 
               <a
-                href="#"
+                onClick={handleLegacyClick}
                 className="inline-flex items-center gap-2 border border-white/50 hover:border-[#f1b759] hover:bg-[#f1b759] hover:text-black text-white px-6 md:px-8 py-3 md:py-4 rounded-sm transition-all duration-300 font-medium tracking-wide backdrop-blur-sm shadow-lg text-sm md:text-base"
               >
                 Our Legacy

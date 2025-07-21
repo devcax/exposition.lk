@@ -7,22 +7,14 @@ import {
   Users,
   Award,
 } from "lucide-react";
-import LegacyPage from "./LegacyPage";
+import { useNavigate } from "react-router";
 
 const Hero: React.FC = () => {
-  const [showLegacy, setShowLegacy] = useState(false);
+  const navigate = useNavigate();
 
   const handleLegacyClick = () => {
-    setShowLegacy(true);
+    navigate("/legacy");
   };
-
-  const handleBackToHome = () => {
-    setShowLegacy(false);
-  };
-
-  if (showLegacy) {
-    return <LegacyPage onBack={handleBackToHome} />;
-  }
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">

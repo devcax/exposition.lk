@@ -1,31 +1,19 @@
-import React from "react";
-import Header from "./components/Header";
-import HeroSlider from "./components/HeroSlider";
-import Gallery from "./components/Gallery";
-import Reviews from "./components/Reviews";
-import PartnershipTree from "./components/PartnershipTree";
-import Footer from "./components/Footer";
-import PartnershipTeam from "./components/PartnershipTeam";
-import SpeakerHighlights from "./components/SpeakerHighlights";
-import InterviewHighlight from "./components/InterviewHighlight";
+import React from 'react'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router'
+import RootLayout from './layout/RootLayout';
+import Home from './pages/Home';
+import Legacy from './pages/Legacy';
 
-function App() {
-  return (
-    <div className="min-h-screen bg-black">
-      <Header />
-      <HeroSlider />
-      {/* <EventStructure /> */}
-      <Gallery />
-      <SpeakerHighlights />
-      <InterviewHighlight />
-      <Reviews />
-      <PartnershipTree />
-
-      {/* <PartnershipPackages /> */}
-      <PartnershipTeam />
-      <Footer />
-    </div>
+const App = () => {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<Home />} />
+        <Route path="legacy" element={<Legacy />} />
+      </Route>
+    )
   );
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
