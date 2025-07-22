@@ -4,8 +4,8 @@ import Header from "../components/Header";
 function RootLayout() {
   return (
     <div className="min-h-screen bg-black ">
-      <Header/>
-      <Outlet/>
+      <Header />
+      <Outlet />
     </div>
   );
 }
