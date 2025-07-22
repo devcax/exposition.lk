@@ -686,7 +686,7 @@ const PartnershipTree: React.FC = () => {
             }`}
           >
             <div
-              className={`bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto premium-transition transform ${
+              className={`bg-gray-900 mt-20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto premium-transition transform ${
                 showModal
                   ? "scale-100 opacity-100 translate-y-0"
                   : "scale-95 opacity-0 translate-y-4"
@@ -711,9 +711,9 @@ const PartnershipTree: React.FC = () => {
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-4 premium-slide-left">
                       <div
-                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 premium-scale-subtle`}
+                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 premium-scale-subtle `}
                       >
-                        <div className="h-8 w-8">
+                        <div className="h-8 w-8 flex items-center justify-center">
                           <GradientIcon
                             id={`modal-${selectedPartnership.id}`}
                             fromColor={selectedPartnership.iconGradient[0]}

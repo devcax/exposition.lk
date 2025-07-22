@@ -30,10 +30,8 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { name: "About Us", href: "#about" },
-    { name: "E-Magazine", href: "#magazine" },
     { name: "Events", href: "#structure" },
-    { name: "Gallery", href: "#gallery" },
+    { name: "Event Structure", href: "#structure" },
     { name: "Partnerships", href: "#partnerships" },
     { name: "Contact", href: "#contact" },
   ];
