@@ -234,7 +234,9 @@ const FloatingCard = ({
           <div>
             <h3
               className={`text-lg font-bold mb-3 text-white line-clamp-2 ${
-                isActive ? 'bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent' : ''
+                isActive
+                  ? "bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent"
+                  : ""
               }`}
             >
               {segment.title}
@@ -249,9 +251,9 @@ const FloatingCard = ({
               onReadMore(segment);
             }}
             className={`w-full text-white font-bold px-4 py-2 rounded-lg transition-all duration-300 text-sm ${
-              isActive 
-                ? 'bg-gradient-to-r from-[#e3c767] to-[#aa7d39] shadow-lg' 
-                : 'bg-gradient-to-r from-[#d4b960] to-[#9a7235] shadow-md'
+              isActive
+                ? "bg-gradient-to-r from-[#e3c767] to-[#aa7d39] shadow-lg"
+                : "bg-gradient-to-r from-[#d4b960] to-[#9a7235] shadow-md"
             }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -292,7 +294,9 @@ const MobileCard = ({ segment, onReadMore, isActive }) => {
       <div className="p-6">
         <h3
           className={`text-xl font-bold mb-3 text-white ${
-            isActive ? 'bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent' : ''
+            isActive
+              ? "bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent"
+              : ""
           }`}
         >
           {segment.title}
@@ -405,7 +409,7 @@ const Timeline = ({ segments, activeIndex, onSelect, isMobile }) => {
 // --- ENHANCED RESPONSIVE MODAL ---
 const SegmentModal = ({ segment, onClose }) => {
   if (!segment) return null;
-  
+
   return (
     <AnimatePresence>
       <motion.div
@@ -444,7 +448,7 @@ const SegmentModal = ({ segment, onClose }) => {
                 <X className="w-5 h-5 md:w-6 md:h-6" />
               </motion.button>
             </div>
-            
+
             {/* Content */}
             <div className="flex-1 p-4 md:p-8 overflow-y-auto">
               <motion.div
@@ -459,7 +463,7 @@ const SegmentModal = ({ segment, onClose }) => {
                   {segment.detailedDescription}
                 </p>
               </motion.div>
-              
+
               <motion.div
                 className="grid grid-cols-1 lg:grid-cols-2 gap-6"
                 initial={{ y: 30, opacity: 0 }}
@@ -480,13 +484,15 @@ const SegmentModal = ({ segment, onClose }) => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.7 + index * 0.1 }}
                       >
-                        <span className="text-[#e3c767] mr-3 mt-1 text-lg">✦</span>
+                        <span className="text-[#e3c767] mr-3 mt-1 text-lg">
+                          ✦
+                        </span>
                         {feature}
                       </motion.li>
                     ))}
                   </ul>
                 </div>
-                
+
                 {/* Target Audience */}
                 <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-gray-700/50">
                   <h3 className="text-lg md:text-xl font-bold mb-4 bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent">
@@ -518,10 +524,10 @@ const Gallery = () => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 1024);
     };
-    
+
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   // Auto-play functionality
@@ -633,13 +639,13 @@ const Gallery = () => {
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
-                
+
                 <div className="text-center">
                   <span className="text-[#e3c767] text-sm font-medium">
                     {activeIndex + 1} of {segmentsData.length}
                   </span>
                 </div>
-                
+
                 <button
                   onClick={() => handleNavigation(1)}
                   className="p-3 bg-gray-800/50 backdrop-blur-sm rounded-full text-white hover:bg-[#e3c767]/20 transition-all duration-300 border border-gray-700/50"
@@ -647,7 +653,7 @@ const Gallery = () => {
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
-              
+
               <AnimatePresence mode="wait">
                 <MobileCard
                   key={activeIndex}
@@ -659,14 +665,17 @@ const Gallery = () => {
             </div>
           ) : (
             // Desktop Layout - 3D Carousel
-            <div className="relative h-[450px] mb-16" style={{ perspective: "1200px" }}>
+            <div
+              className="relative h-[450px] mb-16"
+              style={{ perspective: "1200px" }}
+            >
               <button
                 onClick={() => handleNavigation(-1)}
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/50 backdrop-blur-sm rounded-full p-4 text-white hover:bg-[#e3c767]/20 transition-all duration-300 border border-gray-700/50"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              
+
               <button
                 onClick={() => handleNavigation(1)}
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-800/50 backdrop-blur-sm rounded-full p-4 text-white hover:bg-[#e3c767]/20 transition-all duration-300 border border-gray-700/50"
@@ -712,12 +721,12 @@ const Gallery = () => {
                   {isAutoPlaying ? "Pause" : "Play"}
                 </span>
               </button>
-              
+
               <motion.div
                 className="w-3 h-3 rounded-full bg-[#e3c767]"
                 animate={
-                  isAutoPlaying 
-                    ? { scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] } 
+                  isAutoPlaying
+                    ? { scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }
                     : { scale: 1, opacity: 0.5 }
                 }
                 transition={{ duration: 2, repeat: Infinity }}

@@ -202,13 +202,13 @@ function Legacy() {
       {/* Header */}
       <header className="relative py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex items-center justify-center mb-8">
+          <div className="flex items-center justify-center mb-40">
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#e3c767] to-transparent"></div>
             <Award className="mx-4 w-6 h-6 text-[#e3c767]" />
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#e3c767] to-transparent"></div>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
             <span className="bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent">
               Our Legacy
             </span>
@@ -220,23 +220,23 @@ function Legacy() {
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-[#e3c767]">
             <div className="text-center">
-              <div className="text-3xl font-bold">20</div>
-              <div className="text-sm uppercase tracking-wider text-gray-300">
+              <div className="text-5xl md:text-6xl font-bold">20</div>
+              <div className="text-base md:text-lg uppercase tracking-wider text-gray-300">
                 Years
               </div>
             </div>
-            <div className="w-px h-12 bg-[#e3c767]/30"></div>
+            <div className="w-px h-16 md:h-20 bg-[#e3c767]/30"></div>
             <div className="text-center">
-              <div className="text-3xl font-bold">50+</div>
-              <div className="text-sm uppercase tracking-wider text-gray-300">
+              <div className="text-5xl md:text-6xl font-bold">20+</div>
+              <div className="text-base md:text-lg uppercase tracking-wider text-gray-300">
                 Issues
               </div>
             </div>
-            <div className="w-px h-12 bg-[#e3c767]/30"></div>
+            <div className="w-px h-16 md:h-20 bg-[#e3c767]/30"></div>
             <div className="text-center">
-              <div className="text-3xl font-bold">10K+</div>
-              <div className="text-sm uppercase tracking-wider text-gray-300">
-                Readers
+              <div className="text-5xl md:text-6xl font-bold">100+</div>
+              <div className="text-base md:text-lg uppercase tracking-wider text-gray-300">
+                Interviews
               </div>
             </div>
           </div>
@@ -359,7 +359,6 @@ function Legacy() {
                   <Grid className="w-4 h-4" />
                   <span>Grid</span>
                 </button>
-
               </div>
             </div>
 

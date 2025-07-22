@@ -77,7 +77,7 @@ const HeroSlider = () => {
           >
             {/* Logo Container with max height */}
             <div
-              className="mb-6 md:mb-8 flex items-center justify-center"
+              className="mb-4 md:mb1 flex items-center justify-center"
               style={{ maxHeight: "50vh" }}
             >
               <img

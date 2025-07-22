@@ -87,40 +87,19 @@ const PartnershipCard: React.FC<PartnershipCardProps> = ({
 }) => (
   <div
     onClick={onSelect}
-    className={`relative bg-gray-900/40 backdrop-blur-sm border rounded-xl p-6 cursor-pointer transition-all duration-500 transform hover:scale-[1.02] group ${
+    className={`relative bg-gray-900/40 backdrop-blur-sm border rounded-xl p-6 cursor-pointer premium-transition premium-glow ${
       isSelected
-        ? "border-[#e3c767] shadow-lg shadow-[#e3c767]/20 scale-[1.02]"
-        : "border-gray-800 hover:border-[#e3c767]/60 hover:shadow-xl hover:shadow-[#e3c767]/30"
+        ? "border-[#e3c767] shadow-lg shadow-[#e3c767]/20 premium-scale-subtle"
+        : "border-gray-800 hover:border-[#e3c767]/60 hover:shadow-xl hover:shadow-[#e3c767]/30 premium-scale-hover"
     }`}
-    style={{
-      background: isSelected
-        ? "linear-gradient(135deg, rgba(227, 199, 103, 0.05), rgba(170, 125, 57, 0.05))"
-        : undefined,
-    }}
   >
-    {/* Glowing border animation on hover */}
-    <div
-      className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
-        !isSelected
-          ? "bg-gradient-to-r from-[#e3c767]/20 via-[#aa7d39]/20 to-[#e3c767]/20 blur-xl"
-          : ""
-      }`}
-    />
-
-    {/* Inner glow effect */}
-    <div
-      className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
-        !isSelected ? "shadow-inner shadow-[#e3c767]/10" : ""
-      }`}
-    />
-
     <div className="relative z-10">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div
-            className={`p-3 rounded-lg bg-gradient-to-br ${partnership.color} transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[#e3c767]/30`}
+            className={`p-3 rounded-lg bg-gradient-to-br ${partnership.color} premium-transition premium-float`}
           >
-            <div className="h-6 w-6 transition-transform duration-500 group-hover:rotate-12">
+            <div className="h-6 w-6 premium-rotate">
               <GradientIcon
                 id={partnership.id}
                 fromColor={partnership.iconGradient[0]}
@@ -131,59 +110,46 @@ const PartnershipCard: React.FC<PartnershipCardProps> = ({
             </div>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-white transition-all duration-300 group-hover:text-[#e3c767]">
+            <h4 className="text-lg font-semibold text-white premium-transition">
               {partnership.level}
             </h4>
             {partnership.investment && (
-              <p className="text-[#e3c767] font-medium transition-all duration-300 group-hover:text-[#aa7d39]">
+              <p className="text-[#e3c767] font-medium premium-pulse">
                 {partnership.investment}
               </p>
             )}
           </div>
         </div>
         <div
-          className={`p-2 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-45 ${
+          className={`p-2 rounded-full premium-transition premium-rotate ${
             isSelected
               ? "bg-[#e3c767]/20 text-[#e3c767] shadow-lg shadow-[#e3c767]/30"
-              : "bg-gray-800 text-gray-600 group-hover:bg-[#e3c767]/20 group-hover:text-[#e3c767] group-hover:shadow-lg group-hover:shadow-[#e3c767]/30"
+              : "bg-gray-800 text-gray-600 hover:bg-[#e3c767]/20 hover:text-[#e3c767] hover:shadow-lg hover:shadow-[#e3c767]/30"
           }`}
         >
           <ArrowRight className="w-4 h-4" />
         </div>
       </div>
 
-      <p className="text-gray-400 text-sm line-clamp-2 mb-4 transition-colors duration-300 group-hover:text-gray-300">
+      <p className="text-gray-400 text-sm line-clamp-2 mb-4 premium-transition">
         {partnership.description}
       </p>
 
-      {/* Enhanced Premium Read More Button */}
+      {/* Enhanced Premium Button */}
       <div className="mt-auto">
         <button
           onClick={(e) => {
             e.stopPropagation();
             onSelect();
           }}
-          className={`w-full py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-500 transform flex items-center justify-center gap-2 group-button overflow-hidden relative ${
+          className={`w-full py-2.5 px-4 rounded-lg font-medium text-sm premium-transition premium-shimmer-effect relative overflow-hidden ${
             isSelected
-              ? "bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black shadow-lg hover:shadow-xl hover:shadow-[#e3c767]/40 scale-105"
-              : "bg-gray-800/50 text-gray-300 border border-gray-700 hover:bg-gradient-to-r hover:from-[#aa7d39]/80 hover:to-[#e3c767]/80 hover:border-[#e3c767] hover:text-black hover:shadow-lg hover:shadow-[#e3c767]/30 hover:scale-105"
+              ? "bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black shadow-lg hover:shadow-xl hover:shadow-[#e3c767]/40 premium-scale-hover"
+              : "bg-gray-800/50 text-gray-300 border border-gray-700 hover:bg-gradient-to-r hover:from-[#aa7d39]/80 hover:to-[#e3c767]/80 hover:border-[#e3c767] hover:text-black hover:shadow-lg hover:shadow-[#e3c767]/30 premium-scale-hover"
           }`}
         >
-          {/* Shimmer effect for non-selected buttons */}
-          {!isSelected && (
-            <div className="absolute inset-0 -translate-x-full group-button-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-          )}
-
-          <span className="relative z-10 transition-all duration-300">
-            Read More
-          </span>
-          <ChevronRight
-            className={`w-4 h-4 transition-all duration-500 transform group-button-hover:translate-x-1 relative z-10 ${
-              isSelected
-                ? "text-black"
-                : "text-gray-400 group-button-hover:text-black"
-            }`}
-          />
+          <span className="relative z-10 premium-transition">Read More</span>
+          <ChevronRight className="w-4 h-4 premium-transition premium-rotate inline-block ml-2" />
         </button>
       </div>
     </div>
@@ -372,7 +338,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "premium-career",
         level: "Premium Career Partner",
-        icon: <Crown />, // Premium crown icon like Title Partner
+        icon: <Crown />,
         iconGradient: ["#e3c767", "#aa7d39"],
         color: "from-[#e3c767]/20 to-[#aa7d39]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
@@ -428,7 +394,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "standard-career",
         level: "Standard Career Partner",
-        icon: <Briefcase />, // Professional briefcase icon
+        icon: <Briefcase />,
         iconGradient: ["#aa7d39", "#B78F5A"],
         color: "from-[#aa7d39]/20 to-[#B78F5A]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
@@ -449,7 +415,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "printing",
         level: "Printing Partner",
-        icon: <Gem />, // Premium gem icon like Platinum
+        icon: <Gem />,
         iconGradient: ["#aa7d39", "#e3c767"],
         color: "from-[#aa7d39]/20 to-[#e3c767]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
@@ -467,7 +433,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "photography",
         level: "Photography Partner",
-        icon: <Star />, // Premium star icon like Gold
+        icon: <Star />,
         iconGradient: ["#e3c767", "#B78F5A"],
         color: "from-[#e3c767]/20 to-[#B78F5A]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
@@ -485,7 +451,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "digital",
         level: "Digital Media Partner",
-        icon: <Zap />, // Dynamic lightning icon for digital/tech
+        icon: <Zap />,
         iconGradient: ["#B78F5A", "#aa7d39"],
         color: "from-[#B78F5A]/20 to-[#aa7d39]/20",
         bgColor: "rgba(183, 143, 90, 0.1)",
@@ -503,7 +469,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "food",
         level: "Food & Beverage Partner",
-        icon: <Shield />, // Premium shield icon like Silver
+        icon: <Shield />,
         iconGradient: ["#aa7d39", "#e3c767"],
         color: "from-[#aa7d39]/20 to-[#e3c767]/20",
         bgColor: "rgba(170, 125, 57, 0.1)",
@@ -521,7 +487,7 @@ const PartnershipTree: React.FC = () => {
       {
         id: "copartner",
         level: "Strategic Co-Partner",
-        icon: <Target />, // Premium target icon for strategic partnerships
+        icon: <Target />,
         iconGradient: ["#e3c767", "#B78F5A"],
         color: "from-[#e3c767]/20 to-[#B78F5A]/20",
         bgColor: "rgba(227, 199, 103, 0.1)",
@@ -570,54 +536,57 @@ const PartnershipTree: React.FC = () => {
     >
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#e3c767]/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#aa7d39]/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#e3c767]/5 rounded-full blur-3xl premium-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#aa7d39]/5 rounded-full blur-3xl premium-pulse" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+        {/* Header with premium fade-in */}
+        <div className="text-center mb-16 premium-fade-in">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 premium-float">
             <span className="bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent">
               Partnership Ecosystem
             </span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto premium-fade-in premium-delay-200">
             Join our community of partners and create lasting impact through
             strategic collaboration
           </p>
         </div>
 
-        {/* Modern Tab Navigation */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-full p-1.5 flex">
-            {categories.map((cat) => (
+        {/* Modern Tab Navigation with premium animations */}
+        <div className="max-w-3xl mx-auto mb-12 premium-fade-in premium-delay-300">
+          <div className="bg-gray-900/50 backdrop-blur-sm rounded-full p-1.5 flex premium-glow">
+            {categories.map((cat, index) => (
               <button
                 key={cat.key}
                 onClick={() => handleTabChange(cat.key)}
-                className={`flex-1 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`flex-1 px-6 py-3 rounded-full text-sm font-medium premium-transition ${
                   activeTab === cat.key
-                    ? "bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black shadow-lg"
-                    : "text-gray-400 hover:text-white"
+                    ? "bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black shadow-lg premium-scale-hover"
+                    : "text-gray-400 hover:text-white premium-scale-hover"
                 }`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
-                <span>{cat.label}</span>
-                <span className="ml-2 text-xs opacity-70">({cat.count})</span>
+                <span className="premium-transition">{cat.label}</span>
+                <span className="ml-2 text-xs opacity-70 premium-pulse">
+                  ({cat.count})
+                </span>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Partnership Grid */}
+        {/* Partnership Grid with staggered animations */}
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Cards Section */}
           <div className="lg:col-span-2">
             <div className="grid md:grid-cols-2 gap-4">
               {partnerships[activeTab].map((partnership, index) => (
                 <div
                   key={partnership.id}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                  className="animate-fade-in-up"
+                  className={`premium-fade-in premium-delay-${
+                    ((index % 4) + 1) * 100
+                  }`}
                 >
                   <PartnershipCard
                     partnership={partnership}
@@ -629,9 +598,9 @@ const PartnershipTree: React.FC = () => {
             </div>
           </div>
 
-          {/* Info Panel */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-8 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 p-6">
+          {/* Info Panel with slide animation */}
+          <div className="lg:col-span-1 premium-slide-right premium-delay-400">
+            <div className="sticky top-8 bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 p-6 premium-glow premium-transition">
               <h3 className="text-xl font-semibold text-white mb-4">
                 Partnership Proposal
               </h3>
@@ -670,7 +639,7 @@ const PartnershipTree: React.FC = () => {
                   console.log("Downloading: Partnership_Proposal_Complete.pdf");
                   // You can replace this with actual download logic
                 }}
-                className="w-full py-3 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-[#e3c767]/20 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-[#e3c767]/20 premium-transition flex items-center justify-center gap-2 premium-scale-hover"
               >
                 <svg
                   className="w-4 h-4"
@@ -702,7 +671,7 @@ const PartnershipTree: React.FC = () => {
               <p className="text-gray-400 text-sm mb-4">
                 Let's discuss how we can create a tailored partnership
               </p>
-              <button className="text-[#e3c767] font-medium text-sm hover:underline flex items-center gap-1">
+              <button className="text-[#e3c767] font-medium text-sm hover:underline flex items-center gap-1 premium-transition">
                 Contact Us <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -712,12 +681,12 @@ const PartnershipTree: React.FC = () => {
         {/* Enhanced Modal with animations */}
         {(showModal || modalLoading) && selectedPartnership && (
           <div
-            className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-500 ${
+            className={`fixed inset-0 z-50 flex items-center justify-center p-4 premium-transition ${
               showModal ? "bg-black/80 backdrop-blur-sm" : "bg-black/20"
             }`}
           >
             <div
-              className={`bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transition-all duration-500 transform ${
+              className={`bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto premium-transition transform ${
                 showModal
                   ? "scale-100 opacity-100 translate-y-0"
                   : "scale-95 opacity-0 translate-y-4"
@@ -731,18 +700,18 @@ const PartnershipTree: React.FC = () => {
                       <div className="absolute inset-0 border-4 border-gray-600 rounded-full animate-spin border-t-[#e3c767]" />
                       <div className="absolute inset-2 border-2 border-gray-700 rounded-full animate-spin animate-reverse border-t-[#aa7d39]" />
                     </div>
-                    <p className="text-gray-400 animate-pulse">
+                    <p className="text-gray-400 premium-pulse">
                       Loading partnership details...
                     </p>
                   </div>
                 </div>
               ) : (
                 // Modal content with entrance animations
-                <div className="p-8 animate-fade-in">
+                <div className="p-8 premium-fade-in">
                   <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-4 animate-slide-in-left">
+                    <div className="flex items-center gap-4 premium-slide-left">
                       <div
-                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 animate-bounce-in`}
+                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 premium-scale-subtle`}
                       >
                         <div className="h-8 w-8">
                           <GradientIcon
@@ -755,11 +724,11 @@ const PartnershipTree: React.FC = () => {
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-3xl font-bold text-white animate-slide-in-right">
+                        <h3 className="text-3xl font-bold text-white premium-slide-right">
                           {selectedPartnership.level}
                         </h3>
                         {selectedPartnership.investment && (
-                          <p className="text-[#e3c767] text-xl font-semibold animate-slide-in-right delay-100">
+                          <p className="text-[#e3c767] text-xl font-semibold premium-slide-right premium-delay-100">
                             {selectedPartnership.investment}
                           </p>
                         )}
@@ -767,7 +736,7 @@ const PartnershipTree: React.FC = () => {
                     </div>
                     <button
                       onClick={closeModal}
-                      className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 animate-fade-in"
+                      className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white premium-transition premium-scale-hover premium-fade-in"
                     >
                       <X className="w-6 h-6" />
                     </button>
@@ -775,7 +744,7 @@ const PartnershipTree: React.FC = () => {
 
                   {/* Recognition Statement with animation */}
                   {selectedPartnership.detailedContent?.recognition && (
-                    <div className="mb-8 p-6 bg-gradient-to-r from-[#aa7d39]/10 to-[#e3c767]/10 rounded-xl border border-[#aa7d39]/30 animate-slide-in-up delay-200">
+                    <div className="mb-8 p-6 bg-gradient-to-r from-[#aa7d39]/10 to-[#e3c767]/10 rounded-xl border border-[#aa7d39]/30 premium-slide-up premium-delay-200">
                       <h4 className="text-lg font-semibold text-[#e3c767] mb-3">
                         Partnership Recognition
                       </h4>
@@ -792,27 +761,27 @@ const PartnershipTree: React.FC = () => {
                         (section, sectionIdx) => (
                           <div
                             key={sectionIdx}
-                            className="bg-gray-800/30 rounded-xl p-6 border border-gray-700 animate-slide-in-up"
+                            className="bg-gray-800/30 rounded-xl p-6 border border-gray-700 premium-slide-up"
                             style={{
                               animationDelay: `${(sectionIdx + 3) * 100}ms`,
                             }}
                           >
                             <h4 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                              <div className="w-2 h-2 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] rounded-full animate-pulse" />
+                              <div className="w-2 h-2 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] rounded-full premium-pulse" />
                               {section.title}
                             </h4>
                             <ul className="space-y-3">
                               {section.items.map((item, itemIdx) => (
                                 <li
                                   key={itemIdx}
-                                  className="flex items-start gap-3 text-gray-300 leading-relaxed animate-fade-in"
+                                  className="flex items-start gap-3 text-gray-300 leading-relaxed premium-fade-in"
                                   style={{
                                     animationDelay: `${
                                       (sectionIdx + 3) * 100 + itemIdx * 50
                                     }ms`,
                                   }}
                                 >
-                                  <div className="w-5 h-5 rounded-full bg-[#e3c767]/20 flex items-center justify-center flex-shrink-0 mt-1 transition-all duration-300 hover:bg-[#e3c767]/30 hover:scale-110">
+                                  <div className="w-5 h-5 rounded-full bg-[#e3c767]/20 flex items-center justify-center flex-shrink-0 mt-1 premium-transition premium-scale-hover">
                                     <ChevronRight className="w-3 h-3 text-[#e3c767]" />
                                   </div>
                                   <span>{item}</span>
@@ -849,14 +818,14 @@ const PartnershipTree: React.FC = () => {
                     )}
 
                   {/* Action Buttons */}
-                  <div className="flex gap-4 mt-8 pt-6 border-t border-gray-700 animate-slide-in-up delay-500">
-                    <button className="flex-1 py-4 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-xl hover:shadow-xl hover:shadow-[#e3c767]/30 transition-all duration-500 text-lg transform hover:scale-105 relative overflow-hidden group">
+                  <div className="flex gap-4 mt-8 pt-6 border-t border-gray-700 premium-slide-up premium-delay-500">
+                    <button className="flex-1 py-4 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-xl hover:shadow-xl hover:shadow-[#e3c767]/30 premium-transition text-lg premium-scale-hover relative overflow-hidden group">
                       <span className="relative z-10">Become a Partner</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#e3c767] to-[#aa7d39] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#e3c767] to-[#aa7d39] opacity-0 group-hover:opacity-100 premium-transition" />
                     </button>
                     <button
                       onClick={closeModal}
-                      className="px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-xl transition-all duration-300 hover:scale-105"
+                      className="px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-xl premium-transition premium-scale-hover"
                     >
                       Close
                     </button>
@@ -870,12 +839,13 @@ const PartnershipTree: React.FC = () => {
         <PartnershipSummary />
       </div>
 
-      {/* Add custom CSS for animations */}
+      {/* Premium Minimalistic CSS */}
       <style jsx>{`
-        @keyframes fade-in-up {
+        /* Premium Minimalistic Keyframes */
+        @keyframes premium-fade-in {
           from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(8px);
           }
           to {
             opacity: 1;
@@ -883,107 +853,178 @@ const PartnershipTree: React.FC = () => {
           }
         }
 
-        @keyframes slide-in-left {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes slide-in-right {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes slide-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes bounce-in {
-          0% {
-            opacity: 0;
-            transform: scale(0.3);
+        @keyframes premium-float {
+          0%,
+          100% {
+            transform: translateY(0px);
           }
           50% {
-            opacity: 1;
-            transform: scale(1.1);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1);
+            transform: translateY(-3px);
           }
         }
 
-        @keyframes fade-in {
+        @keyframes premium-scale-subtle {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.02);
+          }
+        }
+
+        @keyframes premium-pulse-gentle {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+
+        @keyframes premium-slide-left {
           from {
             opacity: 0;
+            transform: translateX(-15px);
           }
           to {
             opacity: 1;
+            transform: translateX(0);
           }
         }
 
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
+        @keyframes premium-slide-right {
+          from {
+            opacity: 0;
+            transform: translateX(15px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes premium-slide-up {
+          from {
+            opacity: 0;
+            transform: translateY(15px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes premium-glow-subtle {
+          0%,
+          100% {
+            box-shadow: 0 0 0 rgba(227, 199, 103, 0);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(227, 199, 103, 0.1);
+          }
+        }
+
+        @keyframes premium-shimmer {
+          0% {
+            background-position: -100% 0;
+          }
+          100% {
+            background-position: 100% 0;
+          }
+        }
+
+        @keyframes premium-rotate-gentle {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        /* Premium Animation Classes */
+        .premium-fade-in {
+          animation: premium-fade-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+            forwards;
           opacity: 0;
         }
 
-        .animate-slide-in-left {
-          animation: slide-in-left 0.6s ease-out forwards;
+        .premium-float {
+          animation: premium-float 4s ease-in-out infinite;
+        }
+
+        .premium-scale-hover:hover {
+          animation: premium-scale-subtle 0.8s ease-in-out;
+        }
+
+        .premium-scale-subtle {
+          animation: premium-scale-subtle 0.8s ease-in-out;
+        }
+
+        .premium-pulse {
+          animation: premium-pulse-gentle 2.5s ease-in-out infinite;
+        }
+
+        .premium-slide-left {
+          animation: premium-slide-left 0.5s
+            cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           opacity: 0;
         }
 
-        .animate-slide-in-right {
-          animation: slide-in-right 0.6s ease-out forwards;
+        .premium-slide-right {
+          animation: premium-slide-right 0.5s
+            cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
           opacity: 0;
         }
 
-        .animate-slide-in-up {
-          animation: slide-in-up 0.6s ease-out forwards;
+        .premium-slide-up {
+          animation: premium-slide-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+            forwards;
           opacity: 0;
         }
 
-        .animate-bounce-in {
-          animation: bounce-in 0.8s ease-out forwards;
-          opacity: 0;
+        .premium-glow:hover {
+          animation: premium-glow-subtle 1.5s ease-in-out infinite;
         }
 
-        .animate-fade-in {
-          animation: fade-in 0.4s ease-out forwards;
-          opacity: 0;
+        .premium-shimmer-effect {
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+          );
+          background-size: 200% 100%;
+          animation: premium-shimmer 2s infinite;
         }
 
-        .delay-100 {
+        .premium-rotate:hover {
+          animation: premium-rotate-gentle 0.6s
+            cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Stagger delays for sequence animations */
+        .premium-delay-100 {
           animation-delay: 100ms;
         }
-
-        .delay-200 {
+        .premium-delay-200 {
           animation-delay: 200ms;
         }
-
-        .delay-500 {
+        .premium-delay-300 {
+          animation-delay: 300ms;
+        }
+        .premium-delay-400 {
+          animation-delay: 400ms;
+        }
+        .premium-delay-500 {
           animation-delay: 500ms;
         }
 
-        .group-button-hover:hover .group-button-hover\:translate-x-full {
-          transform: translateX(100%);
+        /* Smooth transitions for all interactive elements */
+        .premium-transition {
+          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .animate-reverse {

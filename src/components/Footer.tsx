@@ -179,9 +179,8 @@ const Footer = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-2 text-gray-500 text-sm">
-                <span>© 2024 Exposition. Made with</span>
-                <Heart className="h-4 w-4 text-red-500 fill-current" />
-                <span>at University of Kelaniya</span>
+                <span>©2025 Exposition.</span>
+                {/* <Heart className="h-4 w-4 text-red-500 fill-current" /> */}
               </div>
               <div className="flex gap-6">
                 <a
