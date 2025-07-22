@@ -12,16 +12,25 @@ import InterviewHighlight from "../components/InterviewHighlight";
 function Home() {
   return (
     <div className="min-h-screen bg-black">
-      <HeroSlider />
-      {/* <EventStructure /> removed */}
-      <Gallery />
+      <div className="hero-container"
+      id="home">
+        <HeroSlider />
+      </div>
+      
+      <div className="gallery-container"
+      id="structure">
+        <Gallery />
+      </div>
+      
       <SpeakerHighlights />
       <InterviewHighlight />
       <Reviews />
       <PartnershipTree />
-
-      {/* <PartnershipPackages /> removed*/}
-      <PartnershipTeam />
+      <div className="team-container"
+      id="contact">
+        <PartnershipTeam />
+      </div>
+      
       <Footer />
     </div>
   );
