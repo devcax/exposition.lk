@@ -686,7 +686,7 @@ const PartnershipTree: React.FC = () => {
             }`}
           >
             <div
-              className={`bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto premium-transition transform ${
+              className={`bg-gray-900 mt-20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto premium-transition transform ${
                 showModal
                   ? "scale-100 opacity-100 translate-y-0"
                   : "scale-95 opacity-0 translate-y-4"
