@@ -711,9 +711,9 @@ const PartnershipTree: React.FC = () => {
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-4 premium-slide-left">
                       <div
-                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 premium-scale-subtle`}
+                        className={`p-4 rounded-xl bg-gradient-to-br ${selectedPartnership.color} shadow-lg shadow-[#e3c767]/20 premium-scale-subtle `}
                       >
-                        <div className="h-8 w-8">
+                        <div className="h-8 w-8 flex items-center justify-center">
                           <GradientIcon
                             id={`modal-${selectedPartnership.id}`}
                             fromColor={selectedPartnership.iconGradient[0]}
