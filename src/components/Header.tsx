@@ -48,18 +48,23 @@ const Header = () => {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
-
+  
   const navItems = [
     { name: 'Home', href: '#home' },
-    { name: 'E-Magazine', href: '#magazine' },
+    { name: 'E-Magazine', href : "https://emagazine.exposition.lk/" },
     { name: 'Event Structure', href: '#structure' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Partnerships', href: '#partnerships' },
     { name: 'Contact', href: '#contact' },
   ];
 
-  const handleNavClick = (href) => {
+  const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
+    // If external link, open in new tab
+    if (href.startsWith('http')) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+      return;
+    }
     // Smooth scroll to section
     const element = document.querySelector(href);
     if (element) {
