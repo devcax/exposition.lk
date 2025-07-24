@@ -41,21 +41,6 @@ interface FamousInterviewee {
   year: number;
 }
 
-interface Issue {
-  year: number;
-  issue: string;
-  keynote: string;
-  keynoteSpeakers: string[];
-  attendees: string;
-  internationalReach: string;
-  interviewees: string[];
-  editorsInChief: TeamMember[];
-  gallery: string[];
-  teamMembers: TeamMember[];
-  background: string;
-  theme: string;
-  testimonials: Testimonial[];
-}
 
 const academicStaff: TeamMember[] = [
   {
@@ -401,10 +386,17 @@ function Legacy() {
             {viewMode === "grid" ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {sortedIssues.map((issue, index) => (
+
                   <div
                     key={issue.year}
                     className="group cursor-pointer transform hover:scale-105 transition-all duration-300"
-                    onClick={() => openModal(issue)}
+                    onClick={() => {
+                      try {
+                        openModal(issue);
+                      } catch (e) {
+                        console.error("Error opening modal:", e, issue);
+                      }
+                    }}
                   >
                     <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden hover:border-[#e3c767]/50 transition-all duration-300">
                       <div

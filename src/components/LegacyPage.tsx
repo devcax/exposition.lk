@@ -47,11 +47,11 @@ const LegacyPage: React.FC<LegacyPageProps> = ({ onBack }) => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {magazineIssues.map((issue) => (
-            <MagazineCard
-              key={issue.id}
-              issue={issue}
-              onViewDetails={handleViewDetails}
-            />
+            // <MagazineCard
+            //   key={issue.id}
+            //   issue={issue}
+            //   onViewDetails={handleViewDetails}
+            // />
           ))}
         </div>
       </div>
