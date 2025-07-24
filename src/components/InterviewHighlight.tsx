@@ -66,7 +66,7 @@ const AutoScrollingSpeakers = () => {
     if (!scrollContainer) return;
 
     let scrollPosition = 0;
-    const scrollSpeed = 0.5; // Reduced speed from 1 to 0.5
+    const scrollSpeed = 0.5;
     const containerWidth = scrollContainer.scrollWidth / 2;
 
     const animate = () => {
@@ -108,7 +108,7 @@ const AutoScrollingSpeakers = () => {
     index: number;
   }) => (
     <div key={`speaker-${index}`} className="flex-shrink-0 w-80 mx-3 py-4">
-      <div className="bg-gray-800/30 backdrop-blur-xl border border-gray-700 rounded-2xl p-6 h-full transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative">
+      <div className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 h-full transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative">
         {/* Category Badge */}
         <div className="flex justify-between items-start mb-4">
           <span className="px-3 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
@@ -153,7 +153,7 @@ const AutoScrollingSpeakers = () => {
           </p>
         </blockquote>
 
-        {/* Bottom decoration - Replaced stars with "ISSUE 21" */}
+        {/* Bottom decoration */}
         <div className="mt-4 pt-3 border-t border-gray-700/50 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span className="text-[#aa7d39] text-xs font-bold tracking-wider">
@@ -170,8 +170,8 @@ const AutoScrollingSpeakers = () => {
     <section className="py-24 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#aa7d39]/20 to-[#e3c767]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#aa7d39]/20 to-[#e3c767]/10 rounded-full"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -191,12 +191,16 @@ const AutoScrollingSpeakers = () => {
 
         {/* Auto-scrolling Container */}
         <div className="relative">
-          {/* Fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-900 via-gray-900/90 to-transparent z-30 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-900 via-gray-900/90 to-transparent z-30 pointer-events-none"></div>
-
-          {/* Scrolling wrapper with better overflow handling */}
-          <div className="overflow-hidden py-2">
+          {/* Scrolling wrapper with gradient mask */}
+          <div
+            className="overflow-hidden py-2"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent, white 10%, white 90%, transparent)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent, white 10%, white 90%, transparent)",
+            }}
+          >
             <div
               ref={scrollRef}
               className="flex"
@@ -226,7 +230,7 @@ const AutoScrollingSpeakers = () => {
 
         {/* Bottom CTA */}
         <div className="mt-20 text-center">
-          <div className="bg-gray-800/30 backdrop-blur-xl rounded-2xl p-8 border border-gray-700">
+          <div className="bg-gray-800/30 rounded-2xl p-8 border border-gray-700">
             <h3 className="text-2xl font-bold text-white mb-4">
               Want to be Featured?
             </h3>
