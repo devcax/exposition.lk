@@ -40,7 +40,21 @@ interface FamousInterviewee {
   image: string;
   year: number;
 }
-
+interface Issue {
+  year: number;
+  issue: string;
+  keynote: string;
+  keynoteSpeakers: string[];
+  attendees: string;
+  internationalReach: string;
+  interviewees: string[];
+  editorsInChief: TeamMember[];
+  gallery: string[];
+  teamMembers: TeamMember[];
+  background: string;
+  theme: string;
+  testimonials: Testimonial[];
+}
 
 const academicStaff: TeamMember[] = [
   {
@@ -678,37 +692,164 @@ function Legacy() {
 
       {/* Modal remains the same but with updated colors */}
       {selectedIssue && (
-        <div className="fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center z-50 p-4 sm:p-6">
-          <div className="bg-gray-900/90 backdrop-blur-sm rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-gray-800">
-            {/* Modal Header */}
-            <div className="flex justify-between items-center p-6 sm:p-8 border-b border-gray-800">
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center p-6 sm:p-8">
+          <div className="bg-gradient-to-br from-gray-900 to-black border border-amber-900/20 hover:border-amber-400/40 transition-all duration-500 rounded-3xl w-full max-w-6xl max-h-[90vh] overflow-hidden text-gray-300 shadow-2xl">
+            {/* Header */}
+            <div className="flex justify-between items-start p-8 border-b border-amber-700/30 relative">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-                  <span className="bg-gradient-to-r from-[#e3c767] via-[#aa7d39] to-[#B78F5A] bg-clip-text text-transparent">
-                    {selectedIssue.year}
-                  </span>
+                <h2 className="text-4xl font-extrabold bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent drop-shadow">
+                  {selectedIssue.year}
                 </h2>
-                <p className="text-xl sm:text-2xl text-white font-light">
-                  {selectedIssue.issue}
-                </p>
-                <p className="text-[#e3c767] mt-2">{selectedIssue.theme}</p>
+                <p className="text-2xl font-semibold text-amber-400 mt-1">{selectedIssue.issue}</p>
+                <p className="italic text-yellow-600 mt-1">{selectedIssue.theme}</p>
               </div>
               <button
                 onClick={closeModal}
-                className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-full"
+                className="text-amber-400 hover:text-white transition-colors p-2 hover:bg-amber-900/20 rounded-full"
               >
-                <X className="w-6 h-6 sm:w-8 sm:h-8" />
+                <X className="w-7 h-7" />
               </button>
             </div>
 
-            {/* Modal Content - Keep the existing content but update colors */}
-            <div className="overflow-y-auto max-h-[calc(90vh-120px)] custom-scrollbar p-6 sm:p-8">
-              {/* Rest of the modal content with updated color scheme */}
-              {/* ... (keeping all existing modal sections but with updated colors) */}
+            {/* Content */}
+            <div className="overflow-y-auto max-h-[calc(90vh-140px)] p-8 space-y-10 custom-scrollbar">
+              {/* Keynote Address */}
+              <section>
+                <h3 className="text-lg font-semibold text-amber-400 mb-3">Keynote Address</h3>
+                <p className="font-medium text-yellow-300">{selectedIssue.keynote}</p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {selectedIssue.keynoteSpeakers.map((speaker, i) => (
+                    <span
+                      key={i}
+                      className="bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold text-sm px-3 py-1 rounded-full shadow-sm"
+                    >
+                      {speaker}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+              {/* Stats */}
+              <section className="flex flex-wrap gap-6">
+                <div className="bg-black/50 p-5 rounded-xl border border-amber-400/30 shadow-lg min-w-[160px] flex-1">
+                  <h4 className="text-amber-400 font-semibold mb-2 flex items-center gap-2">
+                    <Users className="w-5 h-5 text-amber-300" />
+                    Attendees
+                  </h4>
+                  <p className="text-yellow-300 text-xl font-bold">{selectedIssue.attendees}</p>
+                </div>
+                <div className="bg-black/50 p-5 rounded-xl border border-amber-400/30 shadow-lg min-w-[160px] flex-1">
+                  <h4 className="text-amber-400 font-semibold mb-2 flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-amber-300" />
+                    International Reach
+                  </h4>
+                  <p className="text-yellow-300">{selectedIssue.internationalReach}</p>
+                </div>
+              </section>
+
+              {/* Testimonials */}
+              <section>
+                <h3 className="text-xl font-semibold text-amber-400 mb-4">Attendee Testimonials</h3>
+                {selectedIssue.testimonials.map((t, i) => (
+                  <blockquote
+                    key={i}
+                    className="border-l-4 border-amber-500 pl-6 italic text-yellow-200 mb-6"
+                  >
+                    “{t.quote}”
+                    <footer className="mt-2 text-amber-400 font-medium">
+                      {t.author}
+                      <span className="block text-sm text-amber-300">{t.position}</span>
+                    </footer>
+                  </blockquote>
+                ))}
+              </section>
+
+              {/* Interviews */}
+              <section>
+                <h3 className="text-xl font-semibold text-amber-400 mb-3">Featured Interviews</h3>
+                <div className="flex flex-wrap gap-3">
+                  {selectedIssue.interviewees.map((interviewee, i) => (
+                    <span
+                      key={i}
+                      className="bg-gradient-to-r from-amber-500 to-yellow-400 text-black px-3 py-1 rounded-full text-sm font-semibold"
+                    >
+                      {interviewee}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+              {/* Editorial Leadership */}
+              <section>
+                <h3 className="text-xl font-semibold text-amber-400 mb-4">Editorial Leadership</h3>
+                <div className="flex flex-wrap gap-6">
+                  {selectedIssue.editorsInChief.map((editor, i) => (
+                    <div
+                      key={i}
+                      className="bg-black/40 p-4 rounded-xl flex items-center gap-4 border border-amber-400/20 max-w-md"
+                    >
+                      <img
+                        src={editor.image}
+                        alt={editor.name}
+                        className="w-16 h-16 rounded-full border-2 border-amber-500 object-cover shadow-md"
+                      />
+                      <div>
+                        <p className="text-yellow-300 font-semibold">{editor.name}</p>
+                        <p className="text-sm text-amber-400">{editor.position}</p>
+                        <p className="text-sm text-yellow-200">{editor.bio}</p>
+                        <a
+                          href={editor.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-amber-400 underline hover:text-yellow-400 mt-1 inline-block"
+                        >
+                          Professional Profile
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Gallery */}
+              <section>
+                <h3 className="text-xl font-semibold text-amber-400 mb-4">Event Gallery</h3>
+                <div className="flex overflow-x-auto gap-4">
+                  {selectedIssue.gallery.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt={`Gallery ${i}`}
+                      className="h-40 rounded-xl object-cover border border-amber-400/30 shadow-md"
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* Editorial Team */}
+              <section>
+                <h3 className="text-xl font-semibold text-amber-400 mb-4">Editorial Team</h3>
+                <div className="flex flex-wrap gap-8 justify-center">
+                  {selectedIssue.teamMembers.map((member, i) => (
+                    <div key={i} className="text-center w-24">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-16 h-16 rounded-full mx-auto border-2 border-amber-400 object-cover shadow"
+                      />
+                      <p className="text-yellow-300 font-medium mt-2">{member.name}</p>
+                      <p className="text-xs text-amber-400">{member.position}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
           </div>
         </div>
       )}
+
+
+
 
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
