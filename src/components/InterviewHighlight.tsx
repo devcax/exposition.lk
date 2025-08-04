@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Quote, Award, Briefcase, Mail } from "lucide-react";
+import { Award, Briefcase, Mail } from "lucide-react";
 
 const speakers = [
   {
@@ -107,60 +107,49 @@ const AutoScrollingSpeakers = () => {
     speaker: (typeof speakers)[0];
     index: number;
   }) => (
-    <div key={`speaker-${index}`} className="flex-shrink-0 w-80 mx-3 py-4">
-      <div className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 h-full transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative">
-        {/* Category Badge */}
-        <div className="flex justify-between items-start mb-4">
-          <span className="px-3 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
-            {speaker.category}
-          </span>
-          <Quote className="h-5 w-5 text-[#e3c767] opacity-50" />
+    <div key={`speaker-${index}`} className="flex-shrink-0 w-[480px] mx-3 py-4">
+      <div className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 h-[180px] transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative flex items-center space-x-6 overflow-hidden">
+        {/* Left Side: Image Section */}
+        <div className="flex-shrink-0">
+          <img
+            className="w-28 h-28 object-cover rounded-xl ring-2 ring-gray-600"
+            src={speaker.photo}
+            alt={speaker.name}
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement;
+              img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                speaker.name
+              )}&background=aa7d39&color=000000&size=400x192&bold=true`;
+            }}
+          />
         </div>
 
-        {/* Speaker Info */}
-        <div className="flex items-center space-x-4 mb-4">
-          <div className="relative">
-            <img
-              className="h-16 w-16 object-cover rounded-full ring-2 ring-gray-600 transition-all duration-300"
-              src={speaker.photo}
-              alt={speaker.name}
-              onError={(e) => {
-                const img = e.currentTarget as HTMLImageElement;
-                img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                  speaker.name
-                )}&background=aa7d39&color=000000&size=64&bold=true`;
-              }}
-            />
-            <div className="absolute -bottom-1 -right-1 w-8 h-4 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] rounded-full flex items-center justify-center">
-              <span className="text-black text-xs font-bold">21</span>
-            </div>
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-white mb-1 truncate">
+        {/* Right Side: Details Section */}
+        <div className="flex-1 min-w-0 flex flex-col justify-between h-full py-1">
+          {/* Top part: Info and description */}
+          <div className="space-y-1">
+            <h3 className="text-xl font-bold text-white leading-tight truncate">
               {speaker.name}
             </h3>
-            <p className="text-[#aa7d39] text-sm font-medium flex items-center gap-1">
-              <Briefcase className="h-3 w-3 flex-shrink-0" />
+            <p className="text-[#aa7d39] text-sm font-medium flex items-center gap-2">
+              <Briefcase className="h-4 w-4 flex-shrink-0" />
               <span className="truncate">{speaker.designation}</span>
             </p>
+            <p className="text-gray-300 text-sm leading-snug line-clamp-2 pt-1">
+              {speaker.exposition}
+            </p>
           </div>
-        </div>
 
-        {/* Quote */}
-        <blockquote className="relative">
-          <p className="text-gray-300 text-sm leading-relaxed pl-4 border-l-2 border-[#aa7d39]/50 italic">
-            "{speaker.exposition}"
-          </p>
-        </blockquote>
-
-        {/* Bottom decoration */}
-        <div className="mt-4 pt-3 border-t border-gray-700/50 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <span className="text-[#aa7d39] text-xs font-bold tracking-wider">
+          {/* Bottom part: Category and Issue */}
+          <div className="flex justify-between items-center">
+            <span className="px-3 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
+              {speaker.category}
+            </span>
+            <span className="text-[#aa7d39] text-xs font-bold tracking-wider flex items-center gap-2">
               ISSUE 21
+              <Award className="h-4 w-4 text-[#e3c767]" />
             </span>
           </div>
-          <Award className="h-4 w-4 text-[#e3c767] opacity-50" />
         </div>
       </div>
     </div>
