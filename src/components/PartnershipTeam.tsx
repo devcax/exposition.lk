@@ -303,7 +303,6 @@ const PartnershipTeam: React.FC = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };
