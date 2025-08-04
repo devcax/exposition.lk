@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import PartnershipTeam from "../components/PartnershipTeam";
 import SpeakerHighlights from "../components/SpeakerHighlights";
 import InterviewHighlight from "../components/InterviewHighlight";
+import PreviousPartners from "../components/PreviousPartners";
 
 function Home() {
   return (
@@ -24,6 +25,7 @@ function Home() {
       <InterviewHighlight />
       <Reviews />
       <PartnershipTree />
+      <PreviousPartners />
       <div className="team-container" id="contact">
         <PartnershipTeam />
       </div>
