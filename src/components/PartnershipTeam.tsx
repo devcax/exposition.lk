@@ -59,22 +59,24 @@ const PartnershipTeam: React.FC = () => {
               className="flex transition-transform duration-700 ease-in-out"
               style={{ 
                 transform: `translateX(-${currentIndex * 100}%)`,
-                width: `${totalSlides * 100}%`
+                width: `${totalSlides * 100}%`,
               }}
             >
               {Array.from({ length: totalSlides }, (_, slideIndex) => (
                 <div 
                   key={slideIndex}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full flex-shrink-0"
+                  className="w-full flex-shrink-0 px-4"
                 >
-                  {teamMembers
-                    .slice(slideIndex * membersPerView, (slideIndex + 1) * membersPerView)
-                    .map((member, idx) => (
-                    <PartnershipMemberCard
-                      key={`${slideIndex}-${idx}`}
-                      member={member}
-                    />
-                  ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 h-full">
+                    {teamMembers
+                      .slice(slideIndex * membersPerView, (slideIndex + 1) * membersPerView)
+                      .map((member, idx) => (
+                        <PartnershipMemberCard
+                          key={`${slideIndex}-${idx}`}
+                          member={member}
+                        />
+                      ))}
+                  </div>
                 </div>
               ))}
             </div>
