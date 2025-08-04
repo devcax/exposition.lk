@@ -12,16 +12,11 @@ const PartnershipTeam: React.FC = () => {
     if (isAutoPlaying) {
       const interval = setInterval(() => {
         setCurrentIndex(prev => (prev + 1) % totalSlides);
-      }, 4000); // Change slide every 4 seconds
+      }, 4000);
 
       return () => clearInterval(interval);
     }
   }, [isAutoPlaying, totalSlides]);
-
-  const getCurrentMembers = () => {
-    const startIndex = currentIndex * membersPerView;
-    return teamMembers.slice(startIndex, startIndex + membersPerView);
-  };
 
   const handleMouseEnter = () => {
     setIsAutoPlaying(false);
@@ -29,6 +24,11 @@ const PartnershipTeam: React.FC = () => {
 
   const handleMouseLeave = () => {
     setIsAutoPlaying(true);
+  };
+
+  const getCurrentMembers = () => {
+    const startIndex = currentIndex * membersPerView;
+    return teamMembers.slice(startIndex, startIndex + membersPerView);
   };
 
   return (
@@ -47,42 +47,26 @@ const PartnershipTeam: React.FC = () => {
           </p>
         </div>
 
-        {/* Team Cards */}
+        {/* Team Cards Carousel */}
         <div 
-          className="mb-24 relative overflow-hidden"
+          className="mb-16"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Carousel Container */}
-          <div className="relative h-[500px]">
-            <div 
-              className="flex transition-transform duration-700 ease-in-out"
-              style={{ 
-                transform: `translateX(-${currentIndex * 100}%)`,
-                width: `${totalSlides * 100}%`,
-              }}
-            >
-              {Array.from({ length: totalSlides }, (_, slideIndex) => (
-                <div 
-                  key={slideIndex}
-                  className="w-full flex-shrink-0 px-4"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 h-full">
-                    {teamMembers
-                      .slice(slideIndex * membersPerView, (slideIndex + 1) * membersPerView)
-                      .map((member, idx) => (
-                        <PartnershipMemberCard
-                          key={`${slideIndex}-${idx}`}
-                          member={member}
-                        />
-                      ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[500px]">
+            {getCurrentMembers().map((member, idx) => (
+              <div
+                key={`${currentIndex}-${idx}`}
+                className="opacity-0 animate-fade-in"
+                style={{ animationDelay: `${idx * 100}ms` }}
+              >
+                <PartnershipMemberCard member={member} />
+              </div>
+            ))}
           </div>
 
-          {/* Slide Indicators */}
+          {/* Navigation Indicators */}
           <div className="flex justify-center gap-2 mt-8">
             {Array.from({ length: totalSlides }, (_, index) => (
               <button
@@ -101,7 +85,7 @@ const PartnershipTeam: React.FC = () => {
             ))}
           </div>
 
-          {/* Auto-play Status Indicator */}
+          {/* Auto-play Status */}
           <div className="flex justify-center mt-4">
             <div className="flex items-center gap-2 text-gray-400 text-sm">
               <div 
@@ -136,6 +120,24 @@ const PartnershipTeam: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* CSS for fade-in animation */}
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out forwards;
+        }
+      `}</style>
     </section>
   );
 };
