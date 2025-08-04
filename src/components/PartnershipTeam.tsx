@@ -46,6 +46,16 @@ const members: Member[] = [
 ];
 
 const PartnershipTeam: React.FC = () => {
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScrollOffset(prev => (prev + 1) % 360);
+    }, 50); // Smooth 50ms intervals for fluid animation
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,11 +73,15 @@ const PartnershipTeam: React.FC = () => {
         </div>
 
         {/* Team Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24 relative">
           {members.map((member, idx) => (
             <div
               key={idx}
-              className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group"
+              className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group team-card-floating"
+              style={{
+                transform: `translateY(${Math.sin((scrollOffset + idx * 90) * Math.PI / 180) * 8}px)`,
+                transition: 'transform 0.1s ease-out'
+              }}
             >
               {/* Background gradient for the entire card */}
               <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900"></div>
@@ -156,6 +170,62 @@ const PartnershipTeam: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Unique Wave Animation Styles */}
+      <style jsx>{`
+        .team-card-floating {
+          animation: gentle-float 4s ease-in-out infinite;
+        }
+
+        .team-card-floating:nth-child(1) {
+          animation-delay: 0s;
+        }
+
+        .team-card-floating:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+
+        .team-card-floating:nth-child(3) {
+          animation-delay: 1s;
+        }
+
+        .team-card-floating:nth-child(4) {
+          animation-delay: 1.5s;
+        }
+
+        @keyframes gentle-float {
+          0%, 100% {
+            transform: translateY(0px) scale(1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          }
+          25% {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(227, 199, 103, 0.1);
+          }
+          50% {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(227, 199, 103, 0.15);
+          }
+          75% {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(227, 199, 103, 0.1);
+          }
+        }
+
+        /* Enhanced hover effects */
+        .team-card-floating:hover {
+          animation-play-state: paused;
+          transform: translateY(-8px) scale(1.03) !important;
+          box-shadow: 0 15px 35px rgba(227, 199, 103, 0.2) !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .team-card-floating {
+            animation-duration: 3s;
+          }
+        }
+      `}</style>
     </section>
   );
 };
