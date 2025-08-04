@@ -68,6 +68,7 @@ const PreviousPartners = () => {
 
     const animate = () => {
       if (!isPausedRef.current) {
+        // First carousel: Left to Right
         if (scrollContainer1) {
           scrollPosition1 += scrollSpeed;
           if (scrollPosition1 >= containerWidth1) {
@@ -76,9 +77,10 @@ const PreviousPartners = () => {
           scrollContainer1.style.transform = `translateX(-${scrollPosition1}px)`;
         }
 
+        // Second carousel: Right to Left
         if (scrollContainer2) {
-          scrollPosition2 -= scrollSpeed; // Opposite direction
-          if (scrollPosition2 <= -containerWidth2) {
+          scrollPosition2 += scrollSpeed;
+          if (scrollPosition2 >= containerWidth2) {
             scrollPosition2 = 0;
           }
           scrollContainer2.style.transform = `translateX(${scrollPosition2}px)`;
@@ -119,7 +121,7 @@ const PreviousPartners = () => {
           <img
             src={partner.logo}
             alt={partner.name}
-            className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300 filter grayscale group-hover:grayscale-0"
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
             onError={(e) => {
               const img = e.currentTarget as HTMLImageElement;
               img.style.display = "none";
@@ -204,15 +206,15 @@ const PreviousPartners = () => {
           >
             <div
               ref={scrollRef2}
-              className="flex"
+              className="flex flex-row-reverse"
               style={{ width: "max-content" }}
             >
               {/* First set */}
-              {partnersRow2.map((partner, index) => (
+              {[...partnersRow2].reverse().map((partner, index) => (
                 <PartnerLogo key={`row2-first-${index}`} partner={partner} index={index} />
               ))}
               {/* Duplicate set for seamless loop */}
-              {partnersRow2.map((partner, index) => (
+              {[...partnersRow2].reverse().map((partner, index) => (
                 <PartnerLogo key={`row2-second-${index}`} partner={partner} index={index + partnersRow2.length} />
               ))}
             </div>
