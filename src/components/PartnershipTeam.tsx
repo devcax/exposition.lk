@@ -43,18 +43,100 @@ const members: Member[] = [
     image: "/assets/team/nevindi.png",
     linkedin: "https://www.linkedin.com/in/nevindimunasinghe",
   },
+  {
+    name: "Sarah Johnson",
+    title: "Marketing Director",
+    email: "sarah.johnson@exposition.lk",
+    phone: "+94 77 123 4567",
+    image: "https://images.pexels.com/photos/1181414/pexels-photo-1181414.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/sarahjohnson",
+  },
+  {
+    name: "Michael Chen",
+    title: "Technical Lead",
+    email: "michael.chen@exposition.lk",
+    phone: "+94 77 234 5678",
+    image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/michaelchen",
+  },
+  {
+    name: "Emma Davis",
+    title: "Content Manager",
+    email: "emma.davis@exposition.lk",
+    phone: "+94 77 345 6789",
+    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/emmadavis",
+  },
+  {
+    name: "David Miller",
+    title: "Event Coordinator",
+    email: "david.miller@exposition.lk",
+    phone: "+94 77 456 7890",
+    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/davidmiller",
+  },
+  {
+    name: "Lisa Wang",
+    title: "Design Lead",
+    email: "lisa.wang@exposition.lk",
+    phone: "+94 77 567 8901",
+    image: "https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/lisawang",
+  },
+  {
+    name: "James Wilson",
+    title: "Research Coordinator",
+    email: "james.wilson@exposition.lk",
+    phone: "+94 77 678 9012",
+    image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/jameswilson",
+  },
+  {
+    name: "Sophie Turner",
+    title: "Social Media Manager",
+    email: "sophie.turner@exposition.lk",
+    phone: "+94 77 789 0123",
+    image: "https://images.pexels.com/photos/1559486/pexels-photo-1559486.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/sophieturner",
+  },
+  {
+    name: "Alex Rodriguez",
+    title: "Operations Manager",
+    email: "alex.rodriguez@exposition.lk",
+    phone: "+94 77 890 1234",
+    image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
+    linkedin: "https://www.linkedin.com/in/alexrodriguez",
+  },
 ];
 
 const PartnershipTeam: React.FC = () => {
-  const [scrollOffset, setScrollOffset] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const membersPerView = 4;
+  const totalSlides = Math.ceil(members.length / membersPerView);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setScrollOffset(prev => (prev + 1) % 360);
-    }, 50); // Smooth 50ms intervals for fluid animation
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        setCurrentIndex(prev => (prev + 1) % totalSlides);
+      }, 4000); // Change slide every 4 seconds
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoPlaying, totalSlides]);
+
+  const getCurrentMembers = () => {
+    const startIndex = currentIndex * membersPerView;
+    return members.slice(startIndex, startIndex + membersPerView);
+  };
+
+  const handleMouseEnter = () => {
+    setIsAutoPlaying(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoPlaying(true);
+  };
 
   return (
     <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black">
@@ -73,79 +155,130 @@ const PartnershipTeam: React.FC = () => {
         </div>
 
         {/* Team Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24 relative">
-          {members.map((member, idx) => (
-            <div
-              key={idx}
-              className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group team-card-floating"
-              style={{
-                transform: `translateY(${Math.sin((scrollOffset + idx * 90) * Math.PI / 180) * 8}px)`,
-                transition: 'transform 0.1s ease-out'
+        <div 
+          className="mb-24 relative overflow-hidden"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Carousel Container */}
+          <div className="relative h-[500px]">
+            <div 
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ 
+                transform: `translateX(-${currentIndex * 100}%)`,
+                width: `${totalSlides * 100}%`
               }}
             >
-              {/* Background gradient for the entire card */}
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900"></div>
+              {Array.from({ length: totalSlides }, (_, slideIndex) => (
+                <div 
+                  key={slideIndex}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full flex-shrink-0"
+                >
+                  {members
+                    .slice(slideIndex * membersPerView, (slideIndex + 1) * membersPerView)
+                    .map((member, idx) => (
+                    <div
+                      key={`${slideIndex}-${idx}`}
+                      className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group"
+                    >
+                      {/* Background gradient for the entire card */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900"></div>
 
-              {/* Profile Image with Seamless Fade */}
-              <div className="relative h-72 overflow-hidden">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                />
-                {/* Multiple gradient overlays for seamless blend */}
-                <div className="absolute inset-0">
-                  {/* Top subtle gradient for depth */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/20"></div>
-                  {/* Main gradient that matches card background */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/95 via-slate-900/70 to-transparent"
-                    style={{
-                      background:
-                        "linear-gradient(to top, rgb(15 23 42) 0%, rgb(15 23 42 / 0.95) 25%, rgb(15 23 42 / 0.70) 50%, transparent 100%)",
-                    }}
-                  ></div>
-                  {/* Additional gradient for smoother transition */}
-                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                </div>
-              </div>
+                      {/* Profile Image with Seamless Fade */}
+                      <div className="relative h-72 overflow-hidden">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        />
+                        {/* Multiple gradient overlays for seamless blend */}
+                        <div className="absolute inset-0">
+                          {/* Top subtle gradient for depth */}
+                          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/20"></div>
+                          {/* Main gradient that matches card background */}
+                          <div
+                            className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/95 via-slate-900/70 to-transparent"
+                            style={{
+                              background:
+                                "linear-gradient(to top, rgb(15 23 42) 0%, rgb(15 23 42 / 0.95) 25%, rgb(15 23 42 / 0.70) 50%, transparent 100%)",
+                            }}
+                          ></div>
+                          {/* Additional gradient for smoother transition */}
+                          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        </div>
+                      </div>
 
-              {/* Content */}
-              <div className="relative z-10 p-6 -mt-20">
-                {/* Name and Title */}
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-[#e3c767] font-medium text-sm">
-                    {member.title}
-                  </p>
-                </div>
+                      {/* Content */}
+                      <div className="relative z-10 p-6 -mt-20">
+                        {/* Name and Title */}
+                        <div className="text-center mb-6">
+                          <h3 className="text-xl font-bold text-white mb-1">
+                            {member.name}
+                          </h3>
+                          <p className="text-[#e3c767] font-medium text-sm">
+                            {member.title}
+                          </p>
+                        </div>
 
-                {/* Contact Info */}
-                <div className="space-y-3">
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="flex items-center gap-3 p-3 bg-slate-800/30 backdrop-blur-sm rounded-lg hover:bg-slate-800/50 transition-all group/link border border-slate-700/50"
-                  >
-                    <Mail className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
-                    <span className="text-sm text-gray-300 group-hover/link:text-white transition-colors truncate">
-                      {member.email}
-                    </span>
-                  </a>
-                  <a
-                    href={`tel:${member.phone}`}
-                    className="flex items-center gap-3 p-3 bg-slate-800/30 backdrop-blur-sm rounded-lg hover:bg-slate-800/50 transition-all group/link border border-slate-700/50"
-                  >
-                    <Phone className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
-                    <span className="text-sm text-gray-300 group-hover/link:text-white transition-colors">
-                      {member.phone}
-                    </span>
-                  </a>
+                        {/* Contact Info */}
+                        <div className="space-y-3">
+                          <a
+                            href={`mailto:${member.email}`}
+                            className="flex items-center gap-3 p-3 bg-slate-800/30 backdrop-blur-sm rounded-lg hover:bg-slate-800/50 transition-all group/link border border-slate-700/50"
+                          >
+                            <Mail className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                            <span className="text-sm text-gray-300 group-hover/link:text-white transition-colors truncate">
+                              {member.email}
+                            </span>
+                          </a>
+                          <a
+                            href={`tel:${member.phone}`}
+                            className="flex items-center gap-3 p-3 bg-slate-800/30 backdrop-blur-sm rounded-lg hover:bg-slate-800/50 transition-all group/link border border-slate-700/50"
+                          >
+                            <Phone className="w-4 h-4 text-[#e3c767] flex-shrink-0" />
+                            <span className="text-sm text-gray-300 group-hover/link:text-white transition-colors">
+                              {member.phone}
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: totalSlides }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  setIsAutoPlaying(false);
+                  setTimeout(() => setIsAutoPlaying(true), 5000);
+                }}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? "w-8 bg-[#e3c767]"
+                    : "w-2 bg-gray-600 hover:bg-gray-500"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Auto-play Status Indicator */}
+          <div className="flex justify-center mt-4">
+            <div className="flex items-center gap-2 text-gray-400 text-sm">
+              <div 
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  isAutoPlaying ? 'bg-[#e3c767] animate-pulse' : 'bg-gray-600'
+                }`}
+              />
+              <span>{isAutoPlaying ? 'Auto-scrolling' : 'Paused'}</span>
+            </div>
+          </div>
         </div>
 
         {/* CTA Section */}
@@ -171,61 +304,6 @@ const PartnershipTeam: React.FC = () => {
         </div>
       </div>
 
-      {/* Unique Wave Animation Styles */}
-      <style jsx>{`
-        .team-card-floating {
-          animation: gentle-float 4s ease-in-out infinite;
-        }
-
-        .team-card-floating:nth-child(1) {
-          animation-delay: 0s;
-        }
-
-        .team-card-floating:nth-child(2) {
-          animation-delay: 0.5s;
-        }
-
-        .team-card-floating:nth-child(3) {
-          animation-delay: 1s;
-        }
-
-        .team-card-floating:nth-child(4) {
-          animation-delay: 1.5s;
-        }
-
-        @keyframes gentle-float {
-          0%, 100% {
-            transform: translateY(0px) scale(1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-          }
-          25% {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 8px 25px rgba(227, 199, 103, 0.1);
-          }
-          50% {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(227, 199, 103, 0.15);
-          }
-          75% {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 8px 25px rgba(227, 199, 103, 0.1);
-          }
-        }
-
-        /* Enhanced hover effects */
-        .team-card-floating:hover {
-          animation-play-state: paused;
-          transform: translateY(-8px) scale(1.03) !important;
-          box-shadow: 0 15px 35px rgba(227, 199, 103, 0.2) !important;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-          .team-card-floating {
-            animation-duration: 3s;
-          }
-        }
-      `}</style>
     </section>
   );
 };
