@@ -20,6 +20,8 @@ import {
   Palette,
   Globe,
   Target,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import PartnershipSummary from "./PartnershipSummary";
 
@@ -165,6 +167,7 @@ const PartnershipTree: React.FC = () => {
     useState<Partnership | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
 
   const categories = [
     { label: "Monetary Partners", key: "monetary", count: 5 },
@@ -836,7 +839,40 @@ const PartnershipTree: React.FC = () => {
           </div>
         )}
 
-        <PartnershipSummary />
+        {/* Partnership Comparison Toggle Button */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setShowComparison(!showComparison)}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-xl hover:shadow-xl hover:shadow-[#e3c767]/30 premium-transition premium-scale-hover relative overflow-hidden group"
+          >
+            <span className="relative z-10">Compare Partnership Packages</span>
+            <div className="relative z-10 premium-transition">
+              {showComparison ? (
+                <ChevronUp className="w-5 h-5" />
+              ) : (
+                <ChevronDown className="w-5 h-5" />
+              )}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#e3c767] to-[#aa7d39] opacity-0 group-hover:opacity-100 premium-transition" />
+          </button>
+        </div>
+
+        {/* Partnership Summary with Smooth Animation */}
+        <div
+          className={`overflow-hidden premium-transition ${
+            showComparison
+              ? "max-h-[5000px] opacity-100 mt-8"
+              : "max-h-0 opacity-0 mt-0"
+          }`}
+          style={{
+            transitionDuration: "0.8s",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
+          <div className={`premium-transition ${showComparison ? "premium-fade-in" : ""}`}>
+            <PartnershipSummary />
+          </div>
+        </div>
       </div>
 
       {/* Premium Minimalistic CSS */}
