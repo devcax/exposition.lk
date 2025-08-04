@@ -62,7 +62,7 @@ const PreviousPartners = () => {
 
     let scrollPosition1 = 0;
     let scrollPosition2 = 0;
-    const scrollSpeed = 0.5;
+    const scrollSpeed = 0.2;
     const containerWidth1 = scrollContainer1.scrollWidth / 2;
     const containerWidth2 = scrollContainer2.scrollWidth / 2;
 
