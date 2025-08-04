@@ -8,16 +8,16 @@ interface PartnershipMemberCardProps {
 
 const PartnershipMemberCard: React.FC<PartnershipMemberCardProps> = ({ member }) => {
   return (
-    <div className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group">
+    <div className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group h-[500px] w-full">
       {/* Background gradient for the entire card */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900"></div>
 
       {/* Profile Image with Seamless Fade */}
-      <div className="relative h-72 overflow-hidden">
+      <div className="relative h-80 overflow-hidden">
         <img
           src={member.image}
           alt={member.name}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
         />
         {/* Multiple gradient overlays for seamless blend */}
         <div className="absolute inset-0">
@@ -37,7 +37,7 @@ const PartnershipMemberCard: React.FC<PartnershipMemberCardProps> = ({ member })
       </div>
 
       {/* Content */}
-      <div className="relative z-10 p-6 -mt-20">
+      <div className="relative z-10 p-6 -mt-24">
         {/* Name and Title */}
         <div className="text-center mb-6">
           <h3 className="text-xl font-bold text-white mb-1">
