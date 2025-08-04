@@ -6,14 +6,16 @@ interface PartnershipMemberCardProps {
   member: Member;
 }
 
-const PartnershipMemberCard: React.FC<PartnershipMemberCardProps> = ({ member }) => {
+const PartnershipMemberCard: React.FC<PartnershipMemberCardProps> = ({
+  member,
+}) => {
   return (
-    <div className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group h-[500px] w-full">
+    <div className="relative rounded-2xl border border-slate-700 hover:border-[#e3c767]/50 transition-all overflow-hidden group h-[450px] w-full flex flex-col">
       {/* Background gradient for the entire card */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-800 to-slate-900"></div>
 
       {/* Profile Image with Seamless Fade */}
-      <div className="relative h-80 overflow-hidden">
+      <div className="relative h-72 overflow-hidden flex-shrink-0">
         <img
           src={member.image}
           alt={member.name}
@@ -37,19 +39,15 @@ const PartnershipMemberCard: React.FC<PartnershipMemberCardProps> = ({ member })
       </div>
 
       {/* Content */}
-      <div className="relative z-10 p-6 -mt-24">
+      <div className="relative z-10 p-6 -mt-20 flex flex-col flex-grow">
         {/* Name and Title */}
-        <div className="text-center mb-6">
-          <h3 className="text-xl font-bold text-white mb-1">
-            {member.name}
-          </h3>
-          <p className="text-[#e3c767] font-medium text-sm">
-            {member.title}
-          </p>
+        <div className="text-center">
+          <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+          <p className="text-[#e3c767] font-medium text-sm">{member.title}</p>
         </div>
 
         {/* Contact Info */}
-        <div className="space-y-3">
+        <div className="space-y-3 mt-auto">
           <a
             href={`mailto:${member.email}`}
             className="flex items-center gap-3 p-3 bg-slate-800/30 backdrop-blur-sm rounded-lg hover:bg-slate-800/50 transition-all group/link border border-slate-700/50"

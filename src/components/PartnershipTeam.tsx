@@ -1,38 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { teamMembers } from "../data/teamMembers";
 import PartnershipMemberCard from "./PartnershipMemberCard";
 
 const PartnershipTeam: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const membersPerView = 4;
-  const totalSlides = Math.ceil(teamMembers.length / membersPerView);
+  const [isHovered, setIsHovered] = useState(false);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  // Duplicate members for a seamless loop.
+  const duplicatedMembers = [...teamMembers, ...teamMembers];
 
   useEffect(() => {
-    if (isAutoPlaying) {
-      const interval = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % totalSlides);
-      }, 4000);
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
 
-      return () => clearInterval(interval);
+    let animationFrameId: number;
+    let scrollX = 0;
+    const speed = 0.5; // Adjust for speed
+
+    const animate = () => {
+      scrollX -= speed;
+      // If scrolled past the first set of items, reset
+      if (Math.abs(scrollX) >= scroller.scrollWidth / 2) {
+        scrollX = 0;
+      }
+      scroller.style.transform = `translateX(${scrollX}px)`;
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    if (!isHovered) {
+      animationFrameId = requestAnimationFrame(animate);
     }
-  }, [isAutoPlaying, totalSlides]);
 
-  const handleMouseEnter = () => {
-    setIsAutoPlaying(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsAutoPlaying(true);
-  };
-
-  const getCurrentMembers = () => {
-    const startIndex = currentIndex * membersPerView;
-    return teamMembers.slice(startIndex, startIndex + membersPerView);
-  };
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isHovered]);
 
   return (
-    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black">
+    <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <div className="text-center mb-20">
@@ -47,59 +52,23 @@ const PartnershipTeam: React.FC = () => {
           </p>
         </div>
 
-        {/* Team Cards Carousel */}
-        <div 
-          className="mb-16"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+        {/* Team Cards Marquee */}
+        <div
+          className="relative w-full overflow-hidden scroller-fade"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-h-[500px]">
-            {getCurrentMembers().map((member, idx) => (
-              <div
-                key={`${currentIndex}-${idx}`}
-                className="opacity-0 animate-fade-in"
-                style={{ animationDelay: `${idx * 100}ms` }}
-              >
+          <div ref={scrollerRef} className="flex w-max">
+            {duplicatedMembers.map((member, index) => (
+              <div key={index} className="w-[22vw] flex-shrink-0 px-3">
                 <PartnershipMemberCard member={member} />
               </div>
             ))}
           </div>
-
-          {/* Navigation Indicators */}
-          <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: totalSlides }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  setIsAutoPlaying(false);
-                  setTimeout(() => setIsAutoPlaying(true), 5000);
-                }}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "w-8 bg-[#e3c767]"
-                    : "w-2 bg-gray-600 hover:bg-gray-500"
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Auto-play Status */}
-          <div className="flex justify-center mt-4">
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
-              <div 
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  isAutoPlaying ? 'bg-[#e3c767] animate-pulse' : 'bg-gray-600'
-                }`}
-              />
-              <span>{isAutoPlaying ? 'Auto-scrolling' : 'Paused'}</span>
-            </div>
-          </div>
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700 p-12 rounded-2xl text-center max-w-4xl mx-auto">
+        <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700 p-12 rounded-2xl text-center max-w-4xl mx-auto mt-20">
           <h3 className="text-3xl lg:text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-[#e3c767] to-[#aa7d39] bg-clip-text text-transparent">
               Want to Partner With Us?
@@ -120,24 +89,6 @@ const PartnershipTeam: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* CSS for fade-in animation */}
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out forwards;
-        }
-      `}</style>
     </section>
   );
 };
