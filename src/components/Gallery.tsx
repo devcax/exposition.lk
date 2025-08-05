@@ -8,7 +8,7 @@ const segmentsData = [
     id: "mag",
     title: "Exposition Magazine",
     description: "The official publication bridging management and IT.",
-    imageUrl: "/assets/segments/magazine.jpg",
+    imageUrl: "/assets/segments/magazine.png",
     detailedDescription:
       "The Exposition Magazine is our flagship publication featuring insightful articles from industry professionals, showcasing groundbreaking student projects, and exploring the intersection of business management and information technology.",
     keyFeatures: [
@@ -24,7 +24,7 @@ const segmentsData = [
     id: "int",
     title: "Expert Interviews",
     description: "Engaging one-on-one conversations with industry leaders.",
-    imageUrl: "/assets/segments/Interviews.jpg",
+    imageUrl: "/assets/segments/Interviews.png",
     detailedDescription:
       "Our Expert Interviews series brings you face-to-face with the brightest minds in tech and business sectors, offering invaluable insights and inspiration for students and faculty alike.",
     keyFeatures: [
@@ -57,7 +57,7 @@ const segmentsData = [
     id: "edi",
     title: "Edify",
     description: "Celebrating the synergy between academia and industry.",
-    imageUrl: "/assets/segments/Edify.jpg",
+    imageUrl: "/assets/segments/Edify.png",
     detailedDescription:
       "Edify is a special platform dedicated to celebrating meaningful collaborations between our university and industry partners, highlighting successful joint research projects and initiatives.",
     keyFeatures: [
@@ -73,7 +73,7 @@ const segmentsData = [
     id: "how",
     title: "How You Did It",
     description: "Inspiring sessions where mentors share career journeys.",
-    imageUrl: "/assets/segments/howYouDidIt.jpg",
+    imageUrl: "/assets/segments/howYouDidIt.png",
     detailedDescription:
       "'How You Did It' features inspiring talks from successful alumni and respected mentors who share their personal career stories and key decisions that led to their success.",
     keyFeatures: [
@@ -107,7 +107,7 @@ const segmentsData = [
     id: "for",
     title: "Industrial Forum",
     description: "A dynamic forum to discuss the latest industry trends.",
-    imageUrl: "/assets/segments/forum.jpg",
+    imageUrl: "/assets/segments/forum.png",
     detailedDescription:
       "The Industrial Forum brings together students, academics, and industry professionals for dynamic discussions featuring panel discussions and keynote speeches on technological advancements.",
     keyFeatures: [
@@ -217,7 +217,9 @@ const FloatingCard = ({
           <motion.img
             src={segment.imageUrl}
             alt={segment.title}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${
+              segment.id === "int" || segment.id === "edi" ? "object-top" : ""
+            }`}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.3 }}
           />
