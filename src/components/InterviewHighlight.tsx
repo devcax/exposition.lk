@@ -27,7 +27,7 @@ const speakers = [
     name: "Kasun Kalhara",
     designation: "Musician & Composer",
     exposition: "Renowned for his unique blend of musical styles.",
-    photo: "/assets/interviewee/kasun.jpg",
+    photo: "/assets/interviewee/kasunkalhara.jpg",
     category: "Music",
   },
   {
@@ -40,8 +40,7 @@ const speakers = [
   },
   {
     name: "Nadeesha Chandrasena",
-    designation:
-      "Urban Innovator, Environmental Specialist,                                                                                    ",
+    designation: "Urban Innovator, Environmental Specialist",
     exposition:
       "Revolutionizing farming practices through organic and sustainable methodologies.",
     photo: "/assets/interviewee/nadeesha.jpg",
@@ -49,7 +48,7 @@ const speakers = [
   },
   {
     name: "Mrs. Sandra Waduragala",
-    designation: "Founder | Chairwoman of SELYN Exports (Pvt.) Ltd.r",
+    designation: "Founder | Chairwoman of SELYN Exports (Pvt.) Ltd.",
     exposition:
       "Creating meaningful change through innovative social enterprises and community programs.",
     photo: "/assets/interviewee/sandra.png",
@@ -108,12 +107,12 @@ const AutoScrollingSpeakers = () => {
     speaker: (typeof speakers)[0];
     index: number;
   }) => (
-    <div key={`speaker-${index}`} className="flex-shrink-0 w-[480px] mx-3 py-4">
-      <div className="bg-gray-800/30 border border-gray-700 rounded-2xl p-6 h-[180px] transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative flex items-center space-x-6 overflow-hidden">
+    <div key={`speaker-${index}`} className="flex-shrink-0 w-[420px] mx-3 py-4">
+      <div className="bg-gray-800/30 border border-gray-700 rounded-2xl p-5 h-[160px] transition-all duration-500 hover:scale-[1.02] hover:border-[#aa7d39]/50 hover:shadow-xl hover:shadow-[#aa7d39]/10 hover:z-20 relative flex items-center space-x-5 overflow-hidden">
         {/* Left Side: Image Section */}
         <div className="flex-shrink-0">
           <img
-            className="w-28 h-28 object-cover rounded-xl ring-2 ring-gray-600"
+            className="w-24 h-24 object-cover rounded-xl ring-2 ring-gray-600"
             src={speaker.photo}
             alt={speaker.name}
             onError={(e) => {
@@ -129,26 +128,26 @@ const AutoScrollingSpeakers = () => {
         <div className="flex-1 min-w-0 flex flex-col justify-between h-full py-1">
           {/* Top part: Info and description */}
           <div className="space-y-1">
-            <h3 className="text-xl font-bold text-white leading-tight truncate">
+            <h3 className="text-lg font-bold text-white leading-tight truncate">
               {speaker.name}
             </h3>
-            <p className="text-[#aa7d39] text-sm font-medium flex items-center gap-2">
-              <Briefcase className="h-4 w-4 flex-shrink-0" />
+            <p className="text-[#aa7d39] text-xs font-medium flex items-center gap-1.5">
+              <Briefcase className="h-3 w-3 flex-shrink-0" />
               <span className="truncate">{speaker.designation}</span>
             </p>
-            <p className="text-gray-300 text-sm leading-snug line-clamp-2 pt-1">
+            <p className="text-gray-300 text-xs leading-snug line-clamp-2 pt-0.5">
               {speaker.exposition}
             </p>
           </div>
 
           {/* Bottom part: Category and Issue */}
           <div className="flex justify-between items-center">
-            <span className="px-3 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
+            <span className="px-2 py-1 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black text-xs font-semibold rounded-full">
               {speaker.category}
             </span>
-            <span className="text-[#aa7d39] text-xs font-bold tracking-wider flex items-center gap-2">
+            <span className="text-[#aa7d39] text-xs font-bold tracking-wider flex items-center gap-1.5">
               ISSUE 21
-              <Award className="h-4 w-4 text-[#e3c767]" />
+              <Award className="h-3 w-3 text-[#e3c767]" />
             </span>
           </div>
         </div>
@@ -170,7 +169,7 @@ const AutoScrollingSpeakers = () => {
         {/* Header Section */}
         <div className="text-center mb-20">
           <h2 className="text-5xl font-bold text-white mb-6">
-            Interview{" "}
+            Interview & Industrial Forum{" "}
             <span className="bg-gradient-to-r from-[#aa7d39] to-[#e3c767] bg-clip-text text-transparent">
               Highlights
             </span>
