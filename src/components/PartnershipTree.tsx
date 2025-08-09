@@ -638,9 +638,15 @@ const PartnershipTree: React.FC = () => {
 
               <button
                 onClick={() => {
-                  // Add download logic here
-                  console.log("Downloading: Partnership_Proposal_Complete.pdf");
-                  // You can replace this with actual download logic
+                  // Direct download from Google Drive
+                  const downloadUrl =
+                    "https://drive.google.com/uc?export=download&id=1otx54CB4Ep2hrchycUHuzlBs9w35ciyU";
+                  const link = document.createElement("a");
+                  link.href = downloadUrl;
+                  link.download = "Exposition_Partnership_Proposal.pdf";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
                 }}
                 className="w-full py-3 bg-gradient-to-r from-[#aa7d39] to-[#e3c767] text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-[#e3c767]/20 premium-transition flex items-center justify-center gap-2 premium-scale-hover"
               >
@@ -661,8 +667,56 @@ const PartnershipTree: React.FC = () => {
               </button>
 
               {/* Optional: Show file size and format */}
-              <p className="text-gray-500 text-xs text-center mt-2">
+              <p className="text-gray-500 text-xs text-center mt-2 mb-4">
                 PDF • 2.3 MB • Updated Dec 2024
+              </p>
+
+              {/* Divider */}
+              <div className="border-t border-gray-700 my-4"></div>
+
+              {/* Success Report Section */}
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold text-white mb-2">
+                  Success Report
+                </h4>
+                <p className="text-gray-400 text-sm mb-4">
+                  Review our achievements and impact from Exposition Issue 20
+                </p>
+              </div>
+
+              <button
+                onClick={() => {
+                  // Direct download from Google Drive - Success Report
+                  const downloadUrl =
+                    "https://drive.google.com/uc?export=download&id=1XXarUnZFTDaYmS1fJqc1SgoozfozGRV_";
+                  const link = document.createElement("a");
+                  link.href = downloadUrl;
+                  link.download = "Exposition_Issue20_Success_Report.pdf";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="w-full py-3 bg-transparent border border-[#e3c767]/50 text-[#e3c767] font-semibold rounded-lg hover:bg-[#e3c767]/10 hover:border-[#e3c767] hover:shadow-lg hover:shadow-[#e3c767]/20 premium-transition flex items-center justify-center gap-2 premium-scale-hover"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  />
+                </svg>
+                Download Issue 20 Success Report
+              </button>
+
+              {/* Optional: Show file size and format for success report */}
+              <p className="text-gray-500 text-xs text-center mt-2">
+                PDF • 1.8 MB • Results & Analytics
               </p>
             </div>
 
@@ -869,7 +923,11 @@ const PartnershipTree: React.FC = () => {
             transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
-          <div className={`premium-transition ${showComparison ? "premium-fade-in" : ""}`}>
+          <div
+            className={`premium-transition ${
+              showComparison ? "premium-fade-in" : ""
+            }`}
+          >
             <PartnershipSummary />
           </div>
         </div>

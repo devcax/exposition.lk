@@ -53,7 +53,7 @@ export const teamMembers: Member[] = [
     title: "Financial Coordinator",
     email: "kavinda.perera@exposition.lk",
     phone: "+94 77 234 5678",
-    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/ama.png",
     linkedin: "https://www.linkedin.com/in/kavindaperera",
   },
   {
@@ -69,7 +69,7 @@ export const teamMembers: Member[] = [
     title: "Interview Coordinator",
     email: "chamara.jayasinghe@exposition.lk",
     phone: "+94 77 456 7890",
-    image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/dinuwan.png",
     linkedin: "https://www.linkedin.com/in/chamarajayasinghe",
   },
   {
@@ -77,7 +77,7 @@ export const teamMembers: Member[] = [
     title: "Interview Coordinator",
     email: "dilini.rathnayake@exposition.lk",
     phone: "+94 77 567 8901",
-    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/dimuthu.png",
     linkedin: "https://www.linkedin.com/in/dilinirathnayake",
   },
   {
@@ -93,7 +93,7 @@ export const teamMembers: Member[] = [
     title: "ER Coordinator",
     email: "ishara.madushanka@exposition.lk",
     phone: "+94 77 789 0123",
-    image: "https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/ishara.png",
     linkedin: "https://www.linkedin.com/in/isharamadushanka",
   },
   {
@@ -101,7 +101,7 @@ export const teamMembers: Member[] = [
     title: "ER Coordinator",
     email: "priyanka.wijesinghe@exposition.lk",
     phone: "+94 77 890 1234",
-    image: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/dewanga.png",
     linkedin: "https://www.linkedin.com/in/priyankawijesinghe",
   },
   {
@@ -117,7 +117,7 @@ export const teamMembers: Member[] = [
     title: "Editorial Coordinator",
     email: "amaya.rajapaksha@exposition.lk",
     phone: "+94 77 012 3456",
-    image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/sanjani.png",
     linkedin: "https://www.linkedin.com/in/amayarajapaksha",
   },
   {
@@ -133,7 +133,7 @@ export const teamMembers: Member[] = [
     title: "Session Coordinator",
     email: "nimesha.karunaratne@exposition.lk",
     phone: "+94 77 234 5678",
-    image: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=200&h=300&fit=crop",
+    image: "/assets/team/tharuka.png",
     linkedin: "https://www.linkedin.com/in/nimeshakarunaratne",
   },
   {
